@@ -31,7 +31,7 @@ public class LanguageService implements LanguageServiceInterface {
 	
 	@Override
 	public void remove(int id) {
-		languageRepository.deleteById(id);
+		languageRepository.delete(id);
 	}
 	
 }

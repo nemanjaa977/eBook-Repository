@@ -31,7 +31,7 @@ public class CategoryService implements CategoryServiceInterface {
 	
 	@Override
 	public void remove(int id) {
-		categoryRepository.deleteById(id);
+		categoryRepository.delete(id);
 	}
 	
 }

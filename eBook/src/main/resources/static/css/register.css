@@ -1,0 +1,35 @@
+body {
+    background-size: cover;
+    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+}
+
+#logoDiv{
+	text-align: center;
+}
+
+#logo {
+	font-size: 50px;
+	font-style: italic;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#formRegister {
+	padding-top: 100px;
+}
+
+#labela {
+	color: white;
+}
+
+#registerSubmit {
+	background: #d9534f;
+	color: white;
+	float: right;
+}
+
+#registerSubmit:hover {
+	background: white;
+	color: #d9534f;
+}

@@ -1,0 +1,166 @@
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	     -o-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+body {
+    background-size: cover;
+    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+}
+
+.nav-item {
+	cursor: pointer;
+}
+
+#logoDiv{
+	text-align: center;
+}
+
+#logo {
+	font-size: 50px;
+	font-style: italic;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#navbar {
+	font-size: 20px;
+	color: white;
+	padding: 20px;
+	padding-top: 25px;
+}
+
+#navv > a{
+	color: white;
+	font-size: 22px;
+}
+
+#navv > a:hover {
+	color: #d9534f;
+}
+
+#navDivv {
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+#navII {
+	color: white;
+}
+
+#navII:hover {
+	color: #d9534f;
+}
+
+#navRR {
+	color: white;
+}
+
+#navRR:hover {
+	color: #d9534f;
+}
+
+#navbarDropdown {
+	color: white;
+}
+
+#navbarDropdown:hover {
+	background: none;
+	color: #d9534f;
+}
+
+#nameC {
+	border-right: 1px solid #d9d9d9;
+	margin-top: 70px;
+}
+
+.nav-link {
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.nav-link:hover {
+	color: #d9534f;
+}
+
+#imageBook {
+	width: 150px;
+	height: 150px;;
+}
+
+#bookTitle {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 30px;
+}
+
+#bookTitle:hover {
+	color: #d9534f;
+}
+
+#authorBook {
+	color: white;
+	font-size: 18px;
+}
+
+#downloadBook {
+	color: white;
+	cursor: pointer;
+}
+
+#divB {
+	display: -ms-flexbox; 
+    display: flex;
+    -ms-flex-wrap: wrap; 
+    flex-wrap: wrap;
+    padding: 40px 4px;
+    text-align: center;
+    height: 100%;
+}
+
+#oneBook {
+	-ms-flex: 20%; 
+    flex: 20%;
+    max-width: 20%;
+    padding: 0 4px;
+    margin-top: 7px;
+}
+
+
+
+
+@media (max-width: 1280px) {
+    #oneBook {
+        -ms-flex: 30%;
+        flex: 30%;
+        max-width: 30%;
+    }
+}
+
+@media (max-width: 1020px) {
+    #oneBook {
+        -ms-flex: 40%;
+        flex: 40%;
+        max-width: 40%;
+    }
+}
+
+@media (max-width: 680px) {
+    #oneBook {
+        -ms-flex: 60%;
+        flex: 60%;
+        max-width: 60%;
+    }
+}
+/*
+@media (max-width: 1176px) {
+	#navCategory {
+		display: none;
+	}
+}
+*/

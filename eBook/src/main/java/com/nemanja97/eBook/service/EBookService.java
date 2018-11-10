@@ -31,7 +31,12 @@ public class EBookService implements EBookServiceInterface {
 	
 	@Override
 	public void remove(int id) {
-		ebookRepository.deleteById(id);
+		ebookRepository.delete(id);
+	}
+	
+	@Override
+	public List<EBook> findByCategory_Name(String name){
+		return ebookRepository.findByCategory_Name(name);
 	}
 	
 }

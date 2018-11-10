@@ -44,6 +44,16 @@ public class EBookController {
 		return new ResponseEntity<EBookDTO>(new EBookDTO(ebook), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/categories/{name}")
+	public ResponseEntity<List<EBookDTO>> getEbookByName(@PathVariable("name") String name){
+		List<EBook> ebooks = ebookServiceInterface.findByCategory_Name(name);
+		List<EBookDTO> ebooksDTO = new ArrayList<>();
+		for(EBook b: ebooks) {
+			ebooksDTO.add(new EBookDTO(b));
+		}
+		return new ResponseEntity<List<EBookDTO>>(ebooksDTO, HttpStatus.OK);
+	}
+	
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<EBookDTO> createEBook(@RequestBody EBookDTO eBookDTO){
 		EBook b = new EBook();

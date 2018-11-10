@@ -31,7 +31,7 @@ public class UserService implements UserServiceInterface {
 	
 	@Override
 	public void remove(int id) {
-		userRepository.deleteById(id);
+		userRepository.delete(id);
 	}
 	
 	@Override

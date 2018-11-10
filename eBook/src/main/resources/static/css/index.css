@@ -1,0 +1,84 @@
+body {
+    background-size: cover;
+    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+}
+
+.nav-item {
+	cursor: pointer;
+}
+
+#logoDiv{
+	text-align: center;
+}
+
+#logo {
+	font-size: 50px;
+	font-style: italic;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#searchDiv {
+	font-size: 40px;
+	padding: 30px;
+}
+
+#textSearch {
+	color: gray;
+}
+
+#navbar {
+	font-size: 20px;
+	color: white;
+	padding: 20px;
+	padding-top: 25px;
+}
+
+#navv > a{
+	color: white;
+	font-size: 22px;
+}
+
+#navv > a:hover {
+	color: #d9534f;
+}
+
+#navDivv {
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+#navII {
+	color: white;
+}
+
+#navII:hover {
+	color: #d9534f;
+}
+
+#navRR {
+	color: white;
+}
+
+#navRR:hover {
+	color: #d9534f;
+}
+
+#searchButton {
+	background: #d9534f;
+}
+
+#searchButton:hover {
+	background: white;
+	color: #d9534f;
+}
+
+#navbarDropdown {
+	color: white;
+}
+
+#navbarDropdown:hover {
+	background: none;
+	color: #d9534f;
+}

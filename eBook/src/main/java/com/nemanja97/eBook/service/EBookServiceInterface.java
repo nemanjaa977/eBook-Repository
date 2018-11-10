@@ -10,5 +10,6 @@ public interface EBookServiceInterface {
 	List<EBook> findAll();
 	EBook save(EBook ebook);
 	void remove(int id);
+	List<EBook> findByCategory_Name(String name);
 	
 }
