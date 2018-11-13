@@ -50,13 +50,13 @@ $(document).ready(function(){
 	$.get("http://localhost:8080/api/categories",{},function(data){
 		for(var i=0; i<data.length; i++){
 			category = data[i];
-			listt.append("<a class='nav-link' id="+category.name+" href='#'>"+category.name+"</a>"); 
+			listt.append("<a class='nav-link categoty-link' id="+category.name+" href='#'>"+category.name+"</a>"); 
 		}
 	});
 	
 	// load books for one category
 	var allBook = $('#divB');
-	$(document).on("click", ".nav-link",function(event) {
+	$(document).on("click", ".categoty-link",function(event) {
 		var categoryName = $(this).attr("id");
 		$.get("http://localhost:8080/api/ebooks/categories/"+categoryName,{},function(data){
 			allBook.empty();
