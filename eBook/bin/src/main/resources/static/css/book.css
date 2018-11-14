@@ -1,0 +1,124 @@
+body {
+    background-size: cover;
+    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+}
+
+.nav-item {
+	cursor: pointer;
+}
+
+#logoDiv{
+	text-align: center;
+}
+
+#logo {
+	font-size: 50px;
+	font-style: italic;
+	color: white;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#navbar {
+	font-size: 20px;
+	color: white;
+	padding: 20px;
+	padding-top: 25px;
+}
+
+#navv > a{
+	color: white;
+	font-size: 22px;
+}
+
+#navv > a:hover {
+	color: #d9534f;
+}
+
+#navDivv {
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+#navII {
+	color: white;
+}
+
+#navII:hover {
+	color: #d9534f;
+}
+
+#navRR {
+	color: white;
+}
+
+#navRR:hover {
+	color: #d9534f;
+}
+
+#navbarDropdown {
+	color: white;
+}
+
+#navbarDropdown:hover {
+	background: none;
+	color: #d9534f;
+}
+
+#picture {
+	width: 100%;
+	height: 300px;
+	margin-top: 75px;
+}
+
+#bookDiv {
+	margin-top: 75px;
+	padding: 5px;
+}
+
+#titleBook {
+	color: white;
+	font-size: 40px;
+	text-decoration: none;
+	cursor: pointer;
+	font-style: italic;
+}
+
+#titleBook:hover {
+	color: #d9534f;
+}
+
+#authorBook {
+	color: white;
+	font-size: 25px;
+}
+
+#yearBook {
+	color: white;
+	font-size: 20px;
+}
+
+#filenameBook {
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#bookDataButton {
+	margin-top: 30px;
+}
+
+.editButtonBook {
+	color: white;
+	background: #428bca;
+	border: none;
+	font-size: 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 5px;
+}
+
+.editButtonBook:hover {
+	color: #428bca;
+	background: white;
+}
