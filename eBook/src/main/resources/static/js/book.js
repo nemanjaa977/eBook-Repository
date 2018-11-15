@@ -32,7 +32,7 @@ $(document).ready(function(){
 			  "</li>");
 	}
 	
-	// load one user
+	// load one book
 	var bookInformation = $('#bookInformation');
 	$.get("http://localhost:8080/api/ebooks/"+bookID,{},function(data){
 		book = data;
@@ -40,11 +40,17 @@ $(document).ready(function(){
 							"<a href='../html/book.html?id="+book.id+"' id='titleBook'>"+book.title+"</a>" +
 							"<p id='authorBook'>Author: "+book.author+"</p>" +
 							"<p id='yearBook'>Year: "+book.publicationYear+"</p>" +
-							"<p id='filenameBook'>"+book.filename+"</p>" +
 							"<div id='bookDataButton'>" +
-								"<button class='editButtonBook' id='"+book.id+"'>Edit Book</button>" +
+								"<button type='button' class='btn btn-primary editButtonBook' id='"+book.id+"'>Edit Book</button>" +
 							"</div>" +
 					   "</div>");
+		if(logged != null){
+			$('#bookDiv').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
+		}else{
+			$('#bookDiv').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+									"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+								 "</div>");
+		}
 	});
 	
 	
@@ -55,3 +61,8 @@ $(document).ready(function(){
 	});	
 	
 });
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}

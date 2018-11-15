@@ -75,8 +75,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //svim korisnicima dopusti da pristupe putanjama /auth/**
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users", "/api/categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**", "/api/users", "/api/users/{id}").permitAll() 
+                .antMatchers(HttpMethod.PUT, "/api/categories/update/{id}").permitAll()
                 //svaki zahtev mora biti autorizovan
                 .anyRequest().authenticated().and()
                 //presretni svaki zahtev filterom
@@ -93,7 +94,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 HttpMethod.POST,
                 "/auth/login",
-                "/api/users"
+                "/api/users",
+                "/api/categories"
                 
         );
         web.ignoring().antMatchers(
@@ -102,6 +104,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/categories/**",
                 "/api/ebooks/**",
                 "/api/users"
+        );
+        web.ignoring().antMatchers(
+                HttpMethod.PUT,
+                "/api/categories/update/{id}"
+                
         );
         web.ignoring().antMatchers(
                 HttpMethod.GET,
