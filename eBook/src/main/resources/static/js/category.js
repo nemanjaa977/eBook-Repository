@@ -15,12 +15,50 @@ $(document).ready(function(){
 		dropDown.append("<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Profile</a>" +
 						"<div class='dropdown-menu' aria-labelledby='navbarDropdown'>" +
 							"<a class='dropdown-item' href='../html/user.html?id="+logged.id+"'>My Profile</a>" +
+							"<a class='dropdown-item' href='../html/addBook.html' id='addBoook'>Add book</a>" +
 							"<a class='dropdown-item' href='#' id='logoutButton'>Logout</a>" +
 						"</div>");
 		
 		if(logged.type == "Admin"){
 			nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../html/users.html'>Users</a>");
 			$('#buttonCADD').append("<button type='button' class='btn btn-primary' id='buttonAddCategory'><i class='fa fa-plus' aria-hidden='true'></i> New Category</button>");
+			document.getElementById('addBoook').style.display='block';
+			
+			// click edit button for category open
+			$(document).on("click", ".editt-button",function(event) {
+				$('#categoryEditt').fadeIn();
+				var categoryID = $(this).attr("id");
+				$.get("http://localhost:8080/api/categories/"+categoryID,{},function(data){
+					console.log(data);
+					$('#categoryEditt').empty();
+					$('#categoryEditt').append("<form id='formEditCategory'>" +
+												    "<div class='form-group'>" +
+												      "<label for='inputNameCategoryEdit' id='labela'>Category name</label>" +
+												      "<input type='text' class='form-control' id='inputNameCategoryEdit'>" +
+												    "</div>" +
+												    "<button type='submit' class='btn btn-danger editt' id='"+data.id+"' style='margin-right: 10px;'>Submit</button>" +
+												    "<button class='btn btn-light' id='editEditClose'>Close</button>" +
+												"</form>");
+					oldName = $('#inputNameCategoryEdit');
+					oldName.val(data.name);
+				}).fail(function(){
+				alert("Something's wrong!");
+				});
+				
+				event.preventDefault();
+				return false;
+			});
+		}else{
+			$(document).on("click", ".editt-button",function(event) {
+				alert("Only the admin can edit the category!");
+				event.preventDefault();
+				return false;
+				});
+			$(document).on("click", ".deletee-button",function(event) {
+				alert("Only the admin can delete the category!");
+				event.preventDefault();
+				return false;
+				});
 		}
 		
 		
@@ -31,6 +69,16 @@ $(document).ready(function(){
 					  "<li class='nav-item'>" +
 						"<a class='nav-link' href='../html/register.html' id='navRR'>Register</a>" +
 					  "</li>");
+		$(document).on("click", ".editt-button",function(event) {
+			alert("Only the admin can delete the category!");
+			event.preventDefault();
+			return false;
+			});
+		$(document).on("click", ".deletee-button",function(event) {
+			alert("Only the admin can edit the category!");
+			event.preventDefault();
+			return false;
+			});
 	}
 	
 	// load all category in list
@@ -41,7 +89,7 @@ $(document).ready(function(){
 			listt.append("<tr>" +
 							"<td><a class='nav-link' href='../html/books.html'>"+category.name+"</a></td>" +
 							"<td id='editTagg'><button type='button' class='btn btn-info editt-button' id='"+category.id+"'><i class='far fa-edit'></i></button></td>" +
-							"<td id='deleteTagg'><button type='button' class='btn btn-danger' id='"+category.id+"'><i class='fa fa-trash' aria-hidden='true'></i></button></td>" +
+							"<td id='deleteTagg'><button type='button' class='btn btn-danger deletee-button' id='"+category.id+"'><i class='fa fa-trash'></i></button></td>" +
 						"</tr>");
 		}
 	});
@@ -85,31 +133,6 @@ $(document).ready(function(){
 				console.log("ERROR: ", e);
 				alert("Something's wrong!");
 			}
-		});
-		
-		event.preventDefault();
-		return false;
-	});
-	
-	// click edit button for category open
-	$(document).on("click", ".editt-button",function(event) {
-		$('#categoryEditt').fadeIn();
-		var categoryID = $(this).attr("id");
-		$.get("http://localhost:8080/api/categories/"+categoryID,{},function(data){
-			console.log(data);
-			$('#categoryEditt').empty();
-			$('#categoryEditt').append("<form id='formEditCategory'>" +
-										    "<div class='form-group'>" +
-										      "<label for='inputNameCategoryEdit' id='labela'>Category name</label>" +
-										      "<input type='text' class='form-control' id='inputNameCategoryEdit'>" +
-										    "</div>" +
-										    "<button type='submit' class='btn btn-danger editt' id='"+data.id+"' style='margin-right: 10px;'>Submit</button>" +
-										    "<button class='btn btn-light' id='editEditClose'>Close</button>" +
-										"</form>");
-			oldName = $('#inputNameCategoryEdit');
-			oldName.val(data.name);
-		}).fail(function(){
-		alert("Something's wrong!");
 		});
 		
 		event.preventDefault();

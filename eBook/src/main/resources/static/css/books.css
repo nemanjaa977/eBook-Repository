@@ -5,9 +5,8 @@
 			box-sizing: border-box;
 }
 
-body {
-    background-size: cover;
-    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+html body {
+	background-color: #424242;
 }
 
 #searchDiv {
@@ -142,6 +141,10 @@ body {
     max-width: 20%;
     padding: 0 4px;
     margin-top: 7px;
+}
+
+#addBoook {
+	display: none;
 }
 
 

@@ -1,6 +1,5 @@
-body {
-    background-size: cover;
-    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+html body {
+	background-color: #424242;
 }
 
 .nav-item {
@@ -141,4 +140,8 @@ body {
 .submitDataNameNew {
 	float: right;
 	font-size: 20px;
+}
+
+#addBoook {
+	display: none;
 }

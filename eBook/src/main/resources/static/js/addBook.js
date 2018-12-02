@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+	
+	var bookID = window.location.search.slice(1).split('&')[0].split('=')[1];
+	
 	var logged=JSON.parse(localStorage.getItem("loggedUser"));
 	console.log(logged);
 	
@@ -23,31 +25,12 @@ $(document).ready(function(){
 			nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../html/users.html'>Users</a>");
 			document.getElementById('addBoook').style.display='block';
 		}
-	}
-	
-	// load all users
-	var cardDiv = $('#divCards');
-	$.get("http://localhost:8080/api/users",{},function(data){
-		for(var i=0; i<data.length; i++){
-			user = data[i];
-			cardDiv.append("<div class='card'>" +
-								"<img class='card-img-top' src='../photo/photo3.jpg' alt='Card image'>" +
-								"<div class='card-body'>" +
-									"<a class='card-title' href='../html/user.html?id="+user.id+"'>"+user.username+"</a>" +
-									"<p class='card-text'>"+user.firstName+"</p>" +
-									"<p class='card-text'>"+user.lastName+"</p>" +
-									"<p class='card-text' id='roleD'>Role: "+user.type+"</p>" +
-									"<a class='btn btn-danger' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
-								"</div>" +
-						   "</div>");
-		}
-	});
-	
+	}	
 	
 	//logout
 	$(document).on("click", "#logoutButton",function() {
 		localStorage.clear();
 		window.location.replace('../html/login.html');
-	});
+	});	
 	
 });

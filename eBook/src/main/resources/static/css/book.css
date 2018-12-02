@@ -1,6 +1,5 @@
-body {
-    background-size: cover;
-    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+html body {
+	background-color: #424242;
 }
 
 .nav-item {
@@ -112,6 +111,13 @@ body {
 	font-size: 22px;
 }
 
+#addBoook {
+	display: none;
+}
+
+.download-Book {
+	margin-top:30px;
+}
 
 
 
