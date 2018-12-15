@@ -40,12 +40,29 @@
 		</div>
 		<div class="container-fluid" id="treci">
 			<div class="row">
-				<div class="col-5"></div>
+				<div class="col-1"></div>
+				<div class="col-4" id='addNewCategoryDiv'>
+					<div id='buttonCADD'>
+					</div>
+					<div id='categoryNew' class='col-9'>
+						<form id="formAddCategory">
+						    <div class="form-group">
+						      <label for="inputNameCategory" id='labela'>Category name</label>
+						      <input type="text" class="form-control" id="inputNameCategory" placeholder="category name">
+						    </div>
+						    <button type="submit" class="btn btn-light" id="newCategorySubmit">Submit</button>
+						    <button class="btn btn-light" id="closeCategory">Close</button>
+						</form>
+					</div>
+				</div>
 				<div id="divName" class="col-2">
-					<table id="listCategory">
+					<table id="listCategory" >
 					</table>
 				</div>
-				<div class="col-5"></div>
+				<div class="col-4" id='editCategoryDiv'>
+					<div id='categoryEditt' class='col-9'></div>
+				</div>
+				<div class="col-1"></div>
 			</div>
 		</div>
 	</body>

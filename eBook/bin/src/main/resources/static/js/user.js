@@ -17,11 +17,13 @@ $(document).ready(function(){
 		dropDown.append("<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Profile</a>" +
 						"<div class='dropdown-menu' aria-labelledby='navbarDropdown'>" +
 							"<a class='dropdown-item' href='../html/user.html?id="+logged.id+"'>My Profile</a>" +
+							"<a class='dropdown-item' href='../html/addBook.html' id='addBoook'>Add book</a>" +
 							"<a class='dropdown-item' href='#' id='logoutButton'>Logout</a>" +
 						"</div>");
 		
 		if(logged.type == "Admin"){
 			nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../html/users.html'>Users</a>");
+			document.getElementById('addBoook').style.display='block';
 		}
 	}
 	
@@ -35,8 +37,8 @@ $(document).ready(function(){
 							"<p id='lastName'>Last name: "+user.lastName+"</p>" +
 							"<p id='roleUser'>Role: "+user.type+"</p>" +
 							"<div id='editDataButton'>" +
-								"<button class='editButtonP' id='"+user.id+"'>Edit Profile</button>" +
-								"<button class='editButton' id='"+user.id+"'>Change Password</button>" +
+								"<button type='button' class='btn btn-primary editButtonP' id='"+user.id+"'>Edit Profile</button>" +
+								"<button type='button' class='btn btn-primary editButton' id='"+user.id+"'>Change Password</button>" +
 							"</div>" +
 					   "</div>");
 	});
@@ -57,7 +59,7 @@ $(document).ready(function(){
 								    	"<input type='text' class='form-control' id='inputLastName'>" +
 								    "</div>" +
 								    "<button class='btn btn-light' id='nameEditClose'>Close</button>" +
-								    "<button type='submit' class='submitDataNameNew' id='"+data.id+"'>Submit</button>");
+								    "<button type='button' class='btn btn-danger submitDataNameNew' id='"+data.id+"'>Submit</button>");
 			oldFirstName = $('#inputFirstName');
 			oldLastName = $('#inputLastName');
 			oldFirstName.val(data.firstName);
@@ -124,7 +126,7 @@ $(document).ready(function(){
 					    				"<input type='password' class='form-control' id='inputPasswordNewConfirm'>" +
 					    			"</div>" +
 					    			"<button class='btn btn-light' id='closeEditDataa'>Close</button>" +
-					    			"<button type='submit' class='submitNewDataUser' id='"+data.id+"'>Submit</button>");
+					    			"<button type='button' class='btn btn-danger submitNewDataUser' id='"+data.id+"'>Submit</button>");
 		}).fail(function(){
 		alert("Something's wrong!");
 		});

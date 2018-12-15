@@ -1,5 +1,9 @@
 package com.nemanja97.eBook.config;
 
+import java.util.Collections;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.nemanja97.eBook.security.RestAuthenticationEntryPoint;
 import com.nemanja97.eBook.security.TokenAuthenticationFilter;
@@ -75,15 +81,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //svim korisnicima dopusti da pristupe putanjama /auth/**
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users", "/api/categories").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**", "/api/users", "/api/users/{id}").permitAll() 
-                .antMatchers(HttpMethod.PUT, "/api/categories/update/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**").permitAll() 
                 //svaki zahtev mora biti autorizovan
                 .anyRequest().authenticated().and()
                 //presretni svaki zahtev filterom
                 .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService), BasicAuthenticationFilter.class);
 
         http.csrf().disable();
+        http.cors().configurationSource(new CorsConfigurationSource() {
+			
+			@Override
+			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+				CorsConfiguration configuration=new CorsConfiguration();
+				configuration.setAllowedHeaders(Collections.singletonList("*"));
+				configuration.setAllowedMethods(Collections.singletonList("*"));
+				configuration.addAllowedOrigin("*");
+				configuration.setAllowCredentials(true);
+				return configuration;
+			}
+		});
     }
 
 
@@ -94,21 +111,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 HttpMethod.POST,
                 "/auth/login",
-                "/api/users",
-                "/api/categories"
+                "/api/users"
                 
         );
         web.ignoring().antMatchers(
                 HttpMethod.GET,
-                "/api/demo/**",
                 "/api/categories/**",
-                "/api/ebooks/**",
-                "/api/users"
-        );
-        web.ignoring().antMatchers(
-                HttpMethod.PUT,
-                "/api/categories/update/{id}"
-                
+                "/api/ebooks/**"
         );
         web.ignoring().antMatchers(
                 HttpMethod.GET,

@@ -5,9 +5,26 @@
 			box-sizing: border-box;
 }
 
-body {
-    background-size: cover;
-    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+html body {
+	background-color: #424242;
+}
+
+#searchDiv {
+	font-size: 40px;
+	padding: 30px;
+}
+
+#textSearch {
+	color: gray;
+}
+
+#searchButton {
+	background: #d9534f;
+}
+
+#searchButton:hover {
+	background: white;
+	color: #d9534f;
 }
 
 .nav-item {
@@ -74,7 +91,7 @@ body {
 
 #nameC {
 	border-right: 1px solid #d9d9d9;
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .nav-link {
@@ -108,11 +125,6 @@ body {
 	font-size: 18px;
 }
 
-#downloadBook {
-	color: white;
-	cursor: pointer;
-}
-
 #divB {
 	display: -ms-flexbox; 
     display: flex;
@@ -129,6 +141,10 @@ body {
     max-width: 20%;
     padding: 0 4px;
     margin-top: 7px;
+}
+
+#addBoook {
+	display: none;
 }
 
 
@@ -157,10 +173,62 @@ body {
         max-width: 60%;
     }
 }
-/*
+
 @media (max-width: 1176px) {
 	#navCategory {
 		display: none;
 	}
 }
-*/
+
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    font-size: 20px;
+    background-color: #5cb85c;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #d9d9d9;
+    color: #d9534f;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -180%;
+    left: 50%;
+    margin-left: -80px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.popuptext:hover {
+	color: black;
+}
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

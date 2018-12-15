@@ -15,11 +15,13 @@ $(document).ready(function(){
 		dropDown.append("<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Profile</a>" +
 						"<div class='dropdown-menu' aria-labelledby='navbarDropdown'>" +
 							"<a class='dropdown-item' href='../html/user.html?id="+logged.id+"'>My Profile</a>" +
+							"<a class='dropdown-item' href='../html/addBook.html' id='addBoook'>Add book</a>" +
 							"<a class='dropdown-item' href='#' id='logoutButton'>Logout</a>" +
 						"</div>");
 		
 		if(logged.type == "Admin"){
 			nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../html/users.html'>Users</a>");
+			document.getElementById('addBoook').style.display='block';
 		}
 	}else{
 		navbar.append("<li class='nav-item'>" +
@@ -40,8 +42,14 @@ $(document).ready(function(){
 					"<img src='../photo/photo2.png' alt='Book image' id='imageBook'><br>" +
 					"<a id='bookTitle' href='../html/book.html?id="+book.id+"'>"+book.title+"</a>" +
 					"<p id='authorBook'>"+book.author+"</p>" +
-					"<p id='downloadBook'> download</p>" +
 			   "</div>");
+			if(logged != null){
+				$('#oneBook').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
+			}else{
+				$('#oneBook').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+										"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+									 "</div>");
+			}
 		}
 	});
 	
@@ -50,13 +58,13 @@ $(document).ready(function(){
 	$.get("http://localhost:8080/api/categories",{},function(data){
 		for(var i=0; i<data.length; i++){
 			category = data[i];
-			listt.append("<a class='nav-link' id="+category.name+" href='#'>"+category.name+"</a>"); 
+			listt.append("<a class='nav-link categoty-link' id="+category.name+" href='#'>"+category.name+"</a>"); 
 		}
 	});
 	
 	// load books for one category
 	var allBook = $('#divB');
-	$(document).on("click", ".nav-link",function(event) {
+	$(document).on("click", ".categoty-link",function(event) {
 		var categoryName = $(this).attr("id");
 		$.get("http://localhost:8080/api/ebooks/categories/"+categoryName,{},function(data){
 			allBook.empty();
@@ -67,8 +75,14 @@ $(document).ready(function(){
 									"<img src='../photo/photo2.png' alt='Book image' id='imageBook'><br>" +
 									"<a id='bookTitle' href='../html/book.html?id="+book.id+"'>"+book.title+"</a>" +
 									"<p id='authorBook'>"+book.author+"</p>" +
-									"<p id='downloadBook'> download</p>" +
 							   "</div>");
+				if(logged != null){
+					$('#oneBook').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
+				}else{
+					$('#oneBook').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+											"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+										 "</div>");
+				}
 			}
 		});
 		
@@ -83,3 +97,8 @@ $(document).ready(function(){
 	});
 	
 });
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}

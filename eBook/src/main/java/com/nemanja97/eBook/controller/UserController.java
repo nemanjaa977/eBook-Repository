@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +28,14 @@ import com.nemanja97.eBook.service.UserServiceInterface;
 
 @RestController
 @RequestMapping(value="api/users")
+@CrossOrigin("*")
 public class UserController {
 	
 	@Autowired UserServiceInterface userServiceInterface;
 	@Autowired AuthorityServiceInterface authorityServiceInterface;
 	@Autowired PasswordEncoder passwordEncoder;
 	
-	@RequestMapping("/whoami")
+	@GetMapping( value="/whoami")
 	public UserDTO user(Principal user) {
 		 User u= userServiceInterface.findByUsername(user.getName());
 		 return new UserDTO(u);

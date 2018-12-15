@@ -21,4 +21,5 @@ INSERT INTO category(name) VALUES ('Poetry');
 
 
 INSERT INTO ebooks(title, author, keywords, publication_year, filename, mime, language_id, category_id, user_id) VALUES ('The Hobbit', 'Dzon Ronald Rejel Tolkin', '', 2012, 'download', '', 1, 1, 1);
+INSERT INTO ebooks(title, author, keywords, publication_year, filename, mime, language_id, category_id, user_id) VALUES ('Harry Potter', 'J. K. Rowling', '', 2007, 'download', '', 1, 1, 2);
 

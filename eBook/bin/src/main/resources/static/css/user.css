@@ -1,6 +1,5 @@
-body {
-    background-size: cover;
-    background: url('../photo/photo9.jpeg') no-repeat center center fixed;
+html body {
+	background-color: #424242;
 }
 
 .nav-item {
@@ -98,18 +97,7 @@ body {
 }
 
 .editButton {
-	color: white;
-	background: #428bca;
-	border: none;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 2px;
-}
-
-.editButton:hover {
-	color: #428bca;
-	background: white;
+	font-size: 22px;
 }
 
 #labela {
@@ -117,19 +105,8 @@ body {
 }
 
 .submitNewDataUser {
-	background: #d9534f;
-	color: white;
 	float: right;
-	border: none;
 	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 5px;
-}
-
-.submitNewDataUser:hover {
-	background: white;
-	color: #d9534f;
 }
 
 .form-group {
@@ -156,33 +133,15 @@ body {
 }
 
 .editButtonP {
-	color: white;
-	background: #428bca;
-	border: none;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
+	font-size: 22px;
 	margin-right: 10px;
-	padding: 2px;
-}
-
-.editButtonP:hover {
-	color: #428bca;
-	background: white;
 }
 
 .submitDataNameNew {
-	background: #d9534f;
-	color: white;
 	float: right;
-	border: none;
 	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 5px;
 }
 
-.submitDataNameNew:hover {
-	background: white;
-	color: #d9534f;
+#addBoook {
+	display: none;
 }
