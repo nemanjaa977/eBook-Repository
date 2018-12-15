@@ -5,15 +5,15 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 
 @Entity
-@Table(name="authority")
+@Table(name = "authority")
 public class Authority implements GrantedAuthority {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     String name;
 
     @Override

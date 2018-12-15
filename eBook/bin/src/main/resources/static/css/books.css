@@ -1,134 +1,134 @@
 * {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	     -o-box-sizing: border-box;
-			box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html body {
-	background-color: #424242;
+    background-color: #424242;
 }
 
 #searchDiv {
-	font-size: 40px;
-	padding: 30px;
+    font-size: 40px;
+    padding: 30px;
 }
 
 #textSearch {
-	color: gray;
+    color: gray;
 }
 
 #searchButton {
-	background: #d9534f;
+    background: #d9534f;
 }
 
 #searchButton:hover {
-	background: white;
-	color: #d9534f;
+    background: white;
+    color: #d9534f;
 }
 
 .nav-item {
-	cursor: pointer;
+    cursor: pointer;
 }
 
-#logoDiv{
-	text-align: center;
+#logoDiv {
+    text-align: center;
 }
 
 #logo {
-	font-size: 50px;
-	font-style: italic;
-	color: white;
-	padding: 10px;
-	cursor: pointer;
+    font-size: 50px;
+    font-style: italic;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }
 
 #navbar {
-	font-size: 20px;
-	color: white;
-	padding: 20px;
-	padding-top: 25px;
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+    padding-top: 25px;
 }
 
-#navv > a{
-	color: white;
-	font-size: 22px;
+#navv > a {
+    color: white;
+    font-size: 22px;
 }
 
 #navv > a:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navDivv {
-	border-top: 1px solid #d9d9d9;
-	border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
 }
 
 #navII {
-	color: white;
+    color: white;
 }
 
 #navII:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navRR {
-	color: white;
+    color: white;
 }
 
 #navRR:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navbarDropdown {
-	color: white;
+    color: white;
 }
 
 #navbarDropdown:hover {
-	background: none;
-	color: #d9534f;
+    background: none;
+    color: #d9534f;
 }
 
 #nameC {
-	border-right: 1px solid #d9d9d9;
-	margin-top: 50px;
+    border-right: 1px solid #d9d9d9;
+    margin-top: 50px;
 }
 
 .nav-link {
-	color: white;
-	cursor: pointer;
-	text-decoration: none;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #imageBook {
-	width: 150px;
-	height: 150px;;
+    width: 150px;
+    height: 150px;;
 }
 
 #bookTitle {
-	color: white;
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 30px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 30px;
 }
 
 #bookTitle:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #authorBook {
-	color: white;
-	font-size: 18px;
+    color: white;
+    font-size: 18px;
 }
 
 #divB {
-	display: -ms-flexbox; 
+    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap; 
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 40px 4px;
     text-align: center;
@@ -136,7 +136,7 @@ html body {
 }
 
 #oneBook {
-	-ms-flex: 20%; 
+    -ms-flex: 20%;
     flex: 20%;
     max-width: 20%;
     padding: 0 4px;
@@ -144,10 +144,8 @@ html body {
 }
 
 #addBoook {
-	display: none;
+    display: none;
 }
-
-
 
 
 @media (max-width: 1280px) {
@@ -175,9 +173,9 @@ html body {
 }
 
 @media (max-width: 1176px) {
-	#navCategory {
-		display: none;
-	}
+    #navCategory {
+        display: none;
+    }
 }
 
 
@@ -214,7 +212,7 @@ html body {
 }
 
 .popuptext:hover {
-	color: black;
+    color: black;
 }
 
 .popup .show {
@@ -224,11 +222,19 @@ html body {
 }
 
 @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

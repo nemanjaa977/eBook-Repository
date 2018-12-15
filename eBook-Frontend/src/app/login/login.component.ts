@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../service/user/user.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.userService.login(this.username,this.password).subscribe(result=>{
-      console.log(result.access_token);
+      // console.log(result.access_token);
       localStorage.setItem("token",JSON.stringify(result.access_token));
       this.userService.getLogged(result.access_token).subscribe(data =>{
         localStorage.setItem("logged",JSON.stringify(data));

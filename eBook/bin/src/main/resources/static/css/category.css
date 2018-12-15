@@ -1,147 +1,147 @@
 html body {
-	background-color: #424242;
+    background-color: #424242;
 }
 
 .nav-item {
-	cursor: pointer;
+    cursor: pointer;
 }
 
-#logoDiv{
-	text-align: center;
+#logoDiv {
+    text-align: center;
 }
 
 #logo {
-	font-size: 50px;
-	font-style: italic;
-	color: white;
-	padding: 10px;
-	cursor: pointer;
+    font-size: 50px;
+    font-style: italic;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }
 
 #navbar {
-	font-size: 20px;
-	color: white;
-	padding: 20px;
-	padding-top: 25px;
+    font-size: 20px;
+    color: white;
+    padding: 20px;
+    padding-top: 25px;
 }
 
-#navv > a{
-	color: white;
-	font-size: 22px;
+#navv > a {
+    color: white;
+    font-size: 22px;
 }
 
 #navv > a:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navDivv {
-	border-top: 1px solid #d9d9d9;
-	border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
 }
 
 #navII {
-	color: white;
+    color: white;
 }
 
 #navII:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navRR {
-	color: white;
+    color: white;
 }
 
 #navRR:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #navbarDropdown {
-	color: white;
+    color: white;
 }
 
 #navbarDropdown:hover {
-	background: none;
-	color: #d9534f;
+    background: none;
+    color: #d9534f;
 }
 
 #divName {
-	padding-top: 50px;
+    padding-top: 50px;
 }
 
 .nav-link {
-	color: white;
-	cursor: pointer;
-	text-decoration: none;
-	font-size: 19px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 19px;
 }
 
 .nav-link:hover {
-	color: #d9534f;
+    color: #d9534f;
 }
 
 #listCategory {
-	
+
 }
 
 .editt-button {
-	margin-right: 25px;
+    margin-right: 25px;
 }
 
 #buttonAddCategory {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 #labela {
-	color: white;
+    color: white;
 }
 
 #newCategorySubmit {
-	background: #d9534f;
-	color: white;
+    background: #d9534f;
+    color: white;
 }
 
 #newCategorySubmit:hover {
-	background: white;
-	color: #d9534f;
+    background: white;
+    color: #d9534f;
 }
 
 #categoryNew {
-	border: 1px solid #d9d9d9;	
-	border-radius: 5px;
-	padding: 10px;
-	margin-top: 20px;
-	display: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    display: none;
 }
 
 .editt {
-	background: #d9534f;
-	color: white;
+    background: #d9534f;
+    color: white;
 }
 
 .editt:hover {
-	background: white;
-	color: #d9534f;
+    background: white;
+    color: #d9534f;
 }
 
 #categoryEditt {
-	border: 1px solid #d9d9d9;	
-	border-radius: 5px;
-	padding: 10px;
-	margin-top: 55px;
-	margin-left: 40px;
-	display: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 55px;
+    margin-left: 40px;
+    display: none;
 }
 
 .form-group {
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 .form-group:hover {
-	opacity: 1;
+    opacity: 1;
 }
 
 #addBoook {
-	display: none;
+    display: none;
 }
 
 

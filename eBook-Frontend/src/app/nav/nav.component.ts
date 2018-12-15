@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,22 +8,26 @@ import { RouterLink, Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  logged = false;
+  isAdmin = false;
+  token = localStorage.getItem("token");
 
-  constructor(private router:Router) { }
+  constructor(private router:Router) {
+   }
 
   ngOnInit() {
-
-    var token = localStorage.getItem("token");
-    if(token != null){
-      this.logged = true;
+    
+    var l = JSON.parse(localStorage.getItem("logged"));
+    if(l != null){
+      if(l.type == 'Admin'){
+        this.isAdmin = true;
+      }
     }
 
   }
 
   logout(){
     localStorage.clear();
-    this.router.navigate["/login"]
+    this.router.navigate(["/login"]);
   }
 
 }

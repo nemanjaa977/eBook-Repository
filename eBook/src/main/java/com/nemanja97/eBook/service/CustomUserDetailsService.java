@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    
+
     //FUnkcija koja na osnovu username-a iz baze vraca objekat User-a
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

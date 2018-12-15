@@ -9,14 +9,14 @@ import com.nemanja97.eBook.repository.AuthorityRepository;
 @Service
 public class AuthorityService implements AuthorityServiceInterface {
 
-	@Autowired
-	AuthorityRepository authorityRepository;
+    @Autowired
+    AuthorityRepository authorityRepository;
 
-	@Override
-	public Authority findByName(String name) {
-	
-		return authorityRepository.findByName(name);
-	}
-	
-	
+    @Override
+    public Authority findByName(String name) {
+
+        return authorityRepository.findByName(name);
+    }
+
+
 }

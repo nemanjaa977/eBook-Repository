@@ -21,155 +21,146 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements UserDetails {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_id", unique=true, nullable=false)
-	private Integer id;
-	
-	@Column(name="first_name", columnDefinition="varchar(30)", nullable=false)
-	private String firstName;
-	
-	@Column(name="last_name", columnDefinition="varchar(30)", nullable=false)
-	private String lastName;
-	
-	@Column(name="username", columnDefinition="varchar(10)", nullable=false)
-	private String username;
-	
-	@Column(name="password", nullable=false)
-	private String password;
-	
-	@Column(name="type", columnDefinition="varchar(30)", nullable=false)
-	private String type;
-	
-	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="user")
-	private Set<EBook> ebooks = new HashSet<>();
-	
-	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="user")
-	private Set<Category> categories = new HashSet<>();
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-	private Set<Authority> user_authorities = new HashSet<>();
-	
-	public User() {
-		
-	}
 
-	public User(Integer id, String firstName, String lastName, String username, String password, String type,
-			Set<EBook> ebooks, Set<Category> categories) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.type = type;
-		this.ebooks = ebooks;
-		this.categories = categories;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "first_name", columnDefinition = "varchar(30)", nullable = false)
+    private String firstName;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "last_name", columnDefinition = "varchar(30)", nullable = false)
+    private String lastName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @Column(name = "username", columnDefinition = "varchar(10)", nullable = false)
+    private String username;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    @Column(name = "password", nullable = false)
+    private String password;
 
-	public String getLastName() {
-		return lastName;
-	}
+    @Column(name = "type", columnDefinition = "varchar(30)", nullable = false)
+    private String type;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<EBook> ebooks = new HashSet<EBook>();
 
-	public String getUsername() {
-		return username;
-	}
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Category> categories = new HashSet<Category>();
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private Set<Authority> user_authorities = new HashSet<Authority>();
 
-	public String getPassword() {
-		return password;
-	}
+    public User() {
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Set<EBook> getEbooks() {
-		return ebooks;
-	}
-
-	public void setEbooks(Set<EBook> ebooks) {
-		this.ebooks = ebooks;
-	}
-
-	public Set<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-	
-	
-	
-	public Set<Authority> getUser_authorities() {
-		return user_authorities;
-	}
-
-	public void setUser_authorities(Set<Authority> user_authorities) {
-		this.user_authorities = user_authorities;
-	}
-
-	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.user_authorities;
     }
-	
-    @Override
+
+    public User(Integer id, String firstName, String lastName, String username, String password, String type,
+                Set<EBook> ebooks, Set<Category> categories) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.type = type;
+        this.ebooks = ebooks;
+        this.categories = categories;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Set<EBook> getEbooks() {
+        return ebooks;
+    }
+
+    public void setEbooks(Set<EBook> ebooks) {
+        this.ebooks = ebooks;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+
+    public Set<Authority> getUser_authorities() {
+        return user_authorities;
+    }
+
+    public void setUser_authorities(Set<Authority> user_authorities) {
+        this.user_authorities = user_authorities;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return user_authorities;
+    }
+
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-
+    public boolean isEnabled() {
+        return true;
+    }
 }

@@ -5,46 +5,46 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nemanja97.eBook.dto.LanguageDTO;
 
 public class UploadModel {
-	
-	private String title;
+
+    private String title;
     private String keywords;
     private String author;
     private LanguageDTO languageDTO;
     private MultipartFile[] files;
-    
+
     public String getAuthor() {
-		return author;
-	}
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public LanguageDTO getLanguageDTO() {
-		return languageDTO;
-	}
+    public LanguageDTO getLanguageDTO() {
+        return languageDTO;
+    }
 
-	public void setLanguageDTO(LanguageDTO languageDTO) {
-		this.languageDTO = languageDTO;
-	}
+    public void setLanguageDTO(LanguageDTO languageDTO) {
+        this.languageDTO = languageDTO;
+    }
 
     public String getTitle() {
-		return title;
-	}
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getKeywords() {
-		return keywords;
-	}
+    public String getKeywords() {
+        return keywords;
+    }
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
 
-	public MultipartFile[] getFiles() {
+    public MultipartFile[] getFiles() {
         return files;
     }
 

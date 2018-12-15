@@ -10,141 +10,141 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ebooks")
+@Table(name = "ebooks")
 public class EBook {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ebook_id", unique=true, nullable=false)
-	private Integer id;
-	
-	@Column(name="title", columnDefinition="varchar(80)", nullable=false)
-	private String title;
-	
-	@Column(name="author", columnDefinition="varchar(120)", nullable=false)
-	private String author;
-	
-	@Column(name="keywords", columnDefinition="varchar(120)", nullable=false)
-	private String keywords;
-	
-	@Column(name="publication_year", nullable=false)
-	private Integer publication_year;
-	
-	@Column(name="filename", columnDefinition="varchar(200)", nullable=false)
-	private String filename;
-	
-	@Column(name="mime", columnDefinition="varchar(100)", nullable=false)
-	private String mime;
-	
-	@ManyToOne
-	@JoinColumn(name="language_id", referencedColumnName="language_id", nullable=false)
-	private Language language;
-	
-	@ManyToOne
-	@JoinColumn(name="category_id", referencedColumnName="category_id", nullable=false)
-	private Category category;
-	
-	@ManyToOne
-	@JoinColumn(name="user_id", referencedColumnName="user_id", nullable=false)
-	private User user;
-	
-	public EBook() {
-		
-	}
 
-	public EBook(Integer id, String title, String author, String keywords, Integer publication_year, String filename,
-			String mime, Language language, Category category, User user) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.author = author;
-		this.keywords = keywords;
-		this.publication_year = publication_year;
-		this.filename = filename;
-		this.mime = mime;
-		this.language = language;
-		this.category = category;
-		this.user = user;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ebook_id", unique = true, nullable = false)
+    private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "title", columnDefinition = "varchar(80)", nullable = false)
+    private String title;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "author", columnDefinition = "varchar(120)", nullable = false)
+    private String author;
 
-	public String getTitle() {
-		return title;
-	}
+    @Column(name = "keywords", columnDefinition = "varchar(120)", nullable = false)
+    private String keywords;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    @Column(name = "publication_year", nullable = false)
+    private Integer publication_year;
 
-	public String getAuthor() {
-		return author;
-	}
+    @Column(name = "filename", columnDefinition = "varchar(200)", nullable = false)
+    private String filename;
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    @Column(name = "mime", columnDefinition = "varchar(100)", nullable = false)
+    private String mime;
 
-	public String getKeywords() {
-		return keywords;
-	}
+    @ManyToOne
+    @JoinColumn(name = "language_id", referencedColumnName = "language_id", nullable = false)
+    private Language language;
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+    private Category category;
 
-	public Integer getPublication_year() {
-		return publication_year;
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    private User user;
 
-	public void setPublication_year(Integer publication_year) {
-		this.publication_year = publication_year;
-	}
+    public EBook() {
 
-	public String getFilename() {
-		return filename;
-	}
+    }
 
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+    public EBook(Integer id, String title, String author, String keywords, Integer publication_year, String filename,
+                 String mime, Language language, Category category, User user) {
+        super();
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.keywords = keywords;
+        this.publication_year = publication_year;
+        this.filename = filename;
+        this.mime = mime;
+        this.language = language;
+        this.category = category;
+        this.user = user;
+    }
 
-	public String getMime() {
-		return mime;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setMime(String mime) {
-		this.mime = mime;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Language getLanguage() {
-		return language;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public String getKeywords() {
+        return keywords;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public Integer getPublication_year() {
+        return publication_year;
+    }
+
+    public void setPublication_year(Integer publication_year) {
+        this.publication_year = publication_year;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getMime() {
+        return mime;
+    }
+
+    public void setMime(String mime) {
+        this.mime = mime;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

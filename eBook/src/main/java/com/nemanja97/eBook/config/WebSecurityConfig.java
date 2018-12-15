@@ -30,15 +30,14 @@ import com.nemanja97.eBook.security.TokenHelper;
 import com.nemanja97.eBook.service.CustomUserDetailsService;
 
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@CrossOrigin(methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije. 
-	//BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
+    //Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
+    //BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -57,32 +56,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    
+
     //Definisemo nacin autentifikacije
     //Svaki 
     @Autowired
-    public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-        auth.userDetailsService( jwtUserDetailsService )
-            .passwordEncoder( passwordEncoder() );
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(jwtUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Autowired
     TokenHelper tokenHelper;
 
-    
+
     //Definisemo prava pristupa odredjenim URL-ovima
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        		//komunikacija izmedju klijenta i servera je stateless
-                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
+                //komunikacija izmedju klijenta i servera je stateless
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 //za neautorizovane zahteve posalji 401 gresku
-                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and()
+                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
                 .authorizeRequests()
                 //svim korisnicima dopusti da pristupe putanjama /auth/**
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**").permitAll() 
+                .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**").permitAll()
                 //svaki zahtev mora biti autorizovan
                 .anyRequest().authenticated().and()
                 //presretni svaki zahtev filterom
@@ -90,17 +89,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.cors().configurationSource(new CorsConfigurationSource() {
-			
-			@Override
-			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-				CorsConfiguration configuration=new CorsConfiguration();
-				configuration.setAllowedHeaders(Collections.singletonList("*"));
-				configuration.setAllowedMethods(Collections.singletonList("*"));
-				configuration.addAllowedOrigin("*");
-				configuration.setAllowCredentials(true);
-				return configuration;
-			}
-		});
+
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedHeaders(Collections.singletonList("*"));
+                configuration.setAllowedMethods(Collections.singletonList("*"));
+                configuration.addAllowedOrigin("*");
+                configuration.setAllowCredentials(true);
+                return configuration;
+            }
+        });
     }
 
 
@@ -112,7 +111,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 "/auth/login",
                 "/api/users"
-                
+
         );
         web.ignoring().antMatchers(
                 HttpMethod.GET,
@@ -131,9 +130,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/**/*.jpg",
                 "/**/*.jpeg",
                 "/**/*.png"
-                
-            );
 
-    } 
+        );
+
+    }
 
 }

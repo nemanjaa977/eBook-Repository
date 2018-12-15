@@ -35,7 +35,7 @@ import java.util.Map;
 //Na osnovni URL se dodaje /auth kako bi se pristupilo citavom kontroleru
 //Ukoliko je aplikacija podignuta lokalno => localhost:8080/api
 @RestController
-@RequestMapping( value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE )
+@RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin("*")
 public class AuthenticationController {
 
@@ -47,12 +47,12 @@ public class AuthenticationController {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-    
+
     @Autowired
     private DeviceProvider deviceProvider;
-    
+
     @Autowired
-	PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     //Ukoliko je aplikacija podignuta lokalno => localhost:8080/api/login
     //Metodi se prosledjuje objekat u kom se nalazi username i password korisnika
@@ -75,10 +75,10 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Kreiraj token
-        User user = (User)authentication.getPrincipal();
-        String jws = tokenHelper.generateToken( user.getUsername(), device);
+        User user = (User) authentication.getPrincipal();
+        String jws = tokenHelper.generateToken(user.getUsername(), device);
         int expiresIn = tokenHelper.getExpiredIn(device);
-        System.out.println("Sifra :  "+passwordEncoder.encode("123"));
+        System.out.println("Sifra :  " + passwordEncoder.encode("123"));
         // Vrati token kao odgovor na uspesno autentifikaciju
         return ResponseEntity.ok(new UserTokenState(jws, expiresIn));
     }
