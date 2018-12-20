@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
+    var token = localStorage.getItem("token");
 
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
@@ -42,13 +43,15 @@ $(document).ready(function () {
                 "<img src='../photo/photo2.png' alt='Book image' id='imageBook'><br>" +
                 "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
                 "<p id='authorBook'>" + book.author + "</p>" +
+                "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+                "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+                	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+                "</div>"+
                 "</div>");
-            if (logged != null) {
-                $('#oneBook').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
-            } else {
-                $('#oneBook').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
-                    "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
-                    "</div>");
+            if(logged == null) {
+                $('.download-Book').hide();
+            }else{
+            	$('.popup').hide();
             }
         }
     });
@@ -75,13 +78,15 @@ $(document).ready(function () {
                     "<img src='../photo/photo2.png' alt='Book image' id='imageBook'><br>" +
                     "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
                     "<p id='authorBook'>" + book.author + "</p>" +
+                    "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+                    "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+                    	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+                    "</div>"+
                     "</div>");
-                if (logged != null) {
-                    $('#oneBook').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
-                } else {
-                    $('#oneBook').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
-                        "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
-                        "</div>");
+                if(logged == null) {
+                    $('.download-Book').hide();
+                }else{
+                	$('.popup').hide();
                 }
             }
         });

@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
+    var token = localStorage.getItem("token");
 
     var navbar = $('#navbar');
     var dropDown = $('#dropp');

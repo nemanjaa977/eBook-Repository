@@ -14,6 +14,7 @@ import { BookComponent } from './book/book.component';
 import { AddBookComponent } from './add-book/add-book.component';
 
 import { UserService } from './service/user/user.service';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserService } from './service/user/user.service';
     HomeComponent,
     RegisterComponent,
     BookComponent,
-    AddBookComponent
+    AddBookComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

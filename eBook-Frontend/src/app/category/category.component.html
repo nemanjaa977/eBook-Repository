@@ -1,0 +1,18 @@
+<div class="container-fluid col-md-6">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Category name</th>
+        <th scope="col" *ngIf="isAdmin == true">#</th>
+        <th scope="col" *ngIf="isAdmin == true">#</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let c of categories">
+      <tr>
+        <td>{{c.name}}</td>
+        <td *ngIf="isAdmin == true"><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button></td>
+        <td *ngIf="isAdmin == true"><button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

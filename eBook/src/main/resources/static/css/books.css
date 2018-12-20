@@ -9,24 +9,6 @@ html body {
     background-color: #424242;
 }
 
-#searchDiv {
-    font-size: 40px;
-    padding: 30px;
-}
-
-#textSearch {
-    color: gray;
-}
-
-#searchButton {
-    background: #d9534f;
-}
-
-#searchButton:hover {
-    background: white;
-    color: #d9534f;
-}
-
 .nav-item {
     cursor: pointer;
 }

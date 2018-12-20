@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
+    var token = localStorage.getItem("token");
 
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
@@ -27,20 +28,29 @@ $(document).ready(function () {
 
     // load all users
     var cardDiv = $('#divCards');
-    $.get("http://localhost:8080/api/users", {}, function (data) {
-        for (var i = 0; i < data.length; i++) {
-            user = data[i];
-            cardDiv.append("<div class='card'>" +
-                "<img class='card-img-top' src='../photo/photo3.jpg' alt='Card image'>" +
-                "<div class='card-body'>" +
-                "<a class='card-title' href='../html/user.html?id=" + user.id + "'>" + user.username + "</a>" +
-                "<p class='card-text'>" + user.firstName + "</p>" +
-                "<p class='card-text'>" + user.lastName + "</p>" +
-                "<p class='card-text' id='roleD'>Role: " + user.type + "</p>" +
-                "<a class='btn btn-danger' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
-                "</div>" +
-                "</div>");
-        }
+    $.ajax({
+		url: "http://localhost:8080/api/users",
+		type: 'GET',
+		headers: { "Authorization": "Bearer " + token},
+		contentType : "application/json",
+		success : function(data) {
+	        for (var i = 0; i < data.length; i++) {
+	            user = data[i];
+	            cardDiv.append("<div class='card'>" +
+	                "<img class='card-img-top' src='../photo/photo3.jpg' alt='Card image'>" +
+	                "<div class='card-body'>" +
+	                "<a class='card-title' href='../html/user.html?id=" + user.id + "'>" + user.username + "</a>" +
+	                "<p class='card-text'>" + user.firstName + "</p>" +
+	                "<p class='card-text'>" + user.lastName + "</p>" +
+	                "<p class='card-text' id='roleD'>Role: " + user.type + "</p>" +
+	                "<a class='btn btn-danger' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
+	                "</div>" +
+	                "</div>");
+	        }		
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
     });
 
 

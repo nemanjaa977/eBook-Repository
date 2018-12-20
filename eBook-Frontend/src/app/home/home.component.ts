@@ -12,8 +12,11 @@ export class HomeComponent implements OnInit {
 
   categories;
   books;
+  allBookForOneCategory;
 
   constructor(private router:Router, private categoryService:CategoryService, private bookService:EbookService) { }
+
+
 
   ngOnInit() {
 
@@ -29,8 +32,7 @@ export class HomeComponent implements OnInit {
 
   loadAllBookForOneCategory(){
     this.bookService.getEbooksForCategory(this.categories.name).subscribe(data => {
-      console.log(data);
-      
+      this.allBookForOneCategory = data;
     });
   }
 

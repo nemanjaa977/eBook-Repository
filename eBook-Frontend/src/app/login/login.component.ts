@@ -17,13 +17,19 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.userService.login(this.username,this.password).subscribe(result=>{
-      // console.log(result.access_token);
-      localStorage.setItem("token",JSON.stringify(result.access_token));
-      this.userService.getLogged(result.access_token).subscribe(data =>{
-        localStorage.setItem("logged",JSON.stringify(data));
+    if(this.username != "" && this.password != ""){
+      this.userService.login(this.username,this.password).subscribe(result=>{
+        // console.log(result.access_token);
+        localStorage.setItem("token",JSON.stringify(result.access_token));
+        this.userService.getLogged(result.access_token).subscribe(data =>{
+          localStorage.setItem("logged",JSON.stringify(data));
+          // this.router.navigate([""]);
+        }); 
+        window.location.reload(true);
         this.router.navigate([""]);
-      }); 
-    });
+      });
+    }else{
+      alert("You must to fill all fields!");
+    }
   }
 }
