@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this.token = localStorage.getItem("token");
     var l = JSON.parse(localStorage.getItem("logged"));
     if(l != null){
       if(l.type == 'Admin'){

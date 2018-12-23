@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("logged",JSON.stringify(data));
           // this.router.navigate([""]);
         }); 
-        window.location.reload(true);
-        this.router.navigate([""]);
+        this.router.navigate(["/"]);
       });
     }else{
       alert("You must to fill all fields!");
