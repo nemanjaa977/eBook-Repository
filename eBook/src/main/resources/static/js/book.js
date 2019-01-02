@@ -9,6 +9,9 @@ $(document).ready(function () {
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
     var nav = $('#navv');
+    
+    var filenameForEdit = null;
+    var mimeForEdit = null;
 
     nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../index.html'>Home</a>" +
         "<a class='flex-sm-fill text-sm-center nav-link' href='../html/category.html'>Category</a>" +
@@ -45,7 +48,8 @@ $(document).ready(function () {
             "<p id='yearBook'>Year: " + book.publicationYear + "</p>" +
             "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
             "<div id='bookDataButton'>" +
-            "<button type='button' class='btn btn-primary editButtonBook' id='" + book.id + "'>Edit Book</button>" +
+	            "<button type='button' class='btn btn-primary editButtonBook' id='" + book.id + "'>Edit Book</button>" +
+	            "<button type='button' class='btn btn-danger deleteButtonBook' id='" + book.id + "'>Delete Book</button>" +
             "</div>" +
             "</div>");
         if (logged == null) {
@@ -53,7 +57,17 @@ $(document).ready(function () {
                 "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
                 "</div>");
             $('.download-Book').hide();
+            $('.editButtonBook').hide();
+            $('.deleteButtonBook').hide();
         }
+        
+        $('#inputTitle').val(book.title);
+        $('#inputAuthor').val(book.author);
+        $('#inputKeywords').val(book.keywords);
+        $('#inputYear').val(book.publicationYear);
+        
+        filenameForEdit = book.filename;
+        mimeForEdit = book.mime;
     });
 
 
@@ -61,6 +75,83 @@ $(document).ready(function () {
     $(document).on("click", "#logoutButton", function () {
         localStorage.clear();
         window.location.replace('../html/login.html');
+    });
+    
+    //click to open edit form
+    $(document).on("click", ".editButtonBook", function (event) {
+        $('#bookEdit').fadeIn();
+        
+		event.preventDefault();
+		return false;
+    });
+    
+    // click submit button for edit book
+    $('body').on('click', '#editSubmit', function (event) {
+
+        var bookTitle = $('#inputTitle').val();
+        var bookAuthor = $('#inputAuthor').val();
+        var bookKeywords = $('#inputKeywords').val();
+        var bookYear = $('#inputYear').val();
+
+        var param = {
+            'title': bookTitle,
+            'author': bookAuthor,
+            'keywords': bookKeywords,
+            'publicationYear': bookYear,
+            'filename': filenameForEdit,
+            'mime': mimeForEdit
+        }
+
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            url: "http://localhost:8080/api/ebooks/update/" + bookID,
+            data: JSON.stringify(param),
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
+            dataType: 'json',
+            success: function (result) {
+            	window.location.reload();
+            },
+            error: function (e) {
+                console.log("ERROR: ", e);
+                alert("Something's wrong!");
+            }
+        });
+
+        event.preventDefault();
+        return false;
+    });
+    
+    //click to close edit form
+    $(document).on("click", "#closeEdit", function (event) {
+        $('#bookEdit').fadeOut();
+        
+		event.preventDefault();
+		return false;
+    });
+    
+    //delete book
+    $(document).on("click", ".deleteButtonBook", function (event) {
+        var bbbID = $(this).attr("id");       
+    		
+		$.ajax({
+			type : "DELETE",
+			url :"http://localhost:8080/api/ebooks/delete/" + bbbID,
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
+			dataType : 'json',
+			success : function() {
+				window.location.replace("books.html");
+			},
+			error : function(e) {
+				window.location.replace("books.html");
+				console.log("ERROR: ", e);
+			}
+		});
+        
+		event.preventDefault();
+		return false;
     });
 
 });

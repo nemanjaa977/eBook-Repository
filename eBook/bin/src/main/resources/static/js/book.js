@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
+    var token = localStorage.getItem("token");
 
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
@@ -42,16 +43,16 @@ $(document).ready(function () {
             "<a href='../html/book.html?id=" + book.id + "' id='titleBook'>" + book.title + "</a>" +
             "<p id='authorBook'>Author: " + book.author + "</p>" +
             "<p id='yearBook'>Year: " + book.publicationYear + "</p>" +
+            "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
             "<div id='bookDataButton'>" +
             "<button type='button' class='btn btn-primary editButtonBook' id='" + book.id + "'>Edit Book</button>" +
             "</div>" +
             "</div>");
-        if (logged != null) {
-            $('#bookDiv').append("<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>");
-        } else {
+        if (logged == null) {
             $('#bookDiv').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
                 "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
                 "</div>");
+            $('.download-Book').hide();
         }
     });
 

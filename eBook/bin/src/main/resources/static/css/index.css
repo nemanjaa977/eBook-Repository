@@ -19,15 +19,6 @@ html body {
     cursor: pointer;
 }
 
-#searchDiv {
-    font-size: 40px;
-    padding: 30px;
-}
-
-#textSearch {
-    color: gray;
-}
-
 #navbar {
     font-size: 20px;
     color: white;
@@ -62,15 +53,6 @@ html body {
 }
 
 #navRR:hover {
-    color: #d9534f;
-}
-
-#searchButton {
-    background: #d9534f;
-}
-
-#searchButton:hover {
-    background: white;
     color: #d9534f;
 }
 

@@ -69,7 +69,7 @@ $(document).ready(function () {
     			$('#formEditzz').empty();
                 $('#formEditzz').append("<div class='form-group'>" +
                         "<label for='inputUsername' id='labela'>First Username</label>" +
-                        "<input type='text' class='form-control' id='inputUsername'>" +
+                        "<input type='text' class='form-control' id='inputUsername' disabled>" +
                         "</div>" +
 	                	"<div class='form-group'>" +
 	                    "<label for='inputFirstName' id='labela'>First Name</label>" +

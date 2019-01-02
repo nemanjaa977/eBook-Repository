@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
+    var token = localStorage.getItem("token");
 
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
@@ -44,24 +45,13 @@ $(document).ready(function () {
                 }).fail(function () {
                     alert("Something's wrong!");
                 });
+                $('#buttonAddCategory').prop('disabled', true);
+                $('.deletee-button').prop('disabled', true);
 
-                event.preventDefault();
-                return false;
-            });
-        } else {
-            $(document).on("click", ".editt-button", function (event) {
-                alert("Only the admin can edit the category!");
-                event.preventDefault();
-                return false;
-            });
-            $(document).on("click", ".deletee-button", function (event) {
-                alert("Only the admin can delete the category!");
                 event.preventDefault();
                 return false;
             });
         }
-
-
     } else {
         navbar.append("<li class='nav-item'>" +
             "<a class='nav-link' href='../html/login.html' id='navII'>Login</a>" +
@@ -69,16 +59,6 @@ $(document).ready(function () {
             "<li class='nav-item'>" +
             "<a class='nav-link' href='../html/register.html' id='navRR'>Register</a>" +
             "</li>");
-        $(document).on("click", ".editt-button", function (event) {
-            alert("Only the admin can delete the category!");
-            event.preventDefault();
-            return false;
-        });
-        $(document).on("click", ".deletee-button", function (event) {
-            alert("Only the admin can edit the category!");
-            event.preventDefault();
-            return false;
-        });
     }
 
     // load all category in list
@@ -91,6 +71,10 @@ $(document).ready(function () {
                 "<td id='editTagg'><button type='button' class='btn btn-info editt-button' id='" + category.id + "'><i class='far fa-edit'></i></button></td>" +
                 "<td id='deleteTagg'><button type='button' class='btn btn-danger deletee-button' id='" + category.id + "'><i class='fa fa-trash'></i></button></td>" +
                 "</tr>");
+            if(logged == null || logged.type == 'User'){
+            	$('.editt-button').hide();
+            	$('.deletee-button').hide();
+            }
         }
     });
 
@@ -124,6 +108,8 @@ $(document).ready(function () {
             contentType: "application/json",
             url: "http://localhost:8080/api/categories",
             data: JSON.stringify(param),
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
             dataType: 'json',
             success: function (result) {
                 $('#inputNameCategory').val('');
@@ -152,6 +138,8 @@ $(document).ready(function () {
             contentType: "application/json",
             url: "http://localhost:8080/api/categories/update/" + categoryIDD,
             data: JSON.stringify(param),
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
             dataType: 'json',
             success: function (data) {
                 window.location.reload();
@@ -169,6 +157,8 @@ $(document).ready(function () {
     // close file for edit category
     $('body').on('click', '#editEditClose', function (event) {
         $('#categoryEditt').fadeOut();
+        $('#buttonAddCategory').prop('disabled', false);
+        $('.deletee-button').prop('disabled', false);
 
         event.preventDefault();
         return false;

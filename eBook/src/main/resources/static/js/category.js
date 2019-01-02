@@ -163,6 +163,29 @@ $(document).ready(function () {
         event.preventDefault();
         return false;
     });
+    
+    //delete category
+    $(document).on("click", ".deletee-button", function (event) {
+        var cccID = $(this).attr("id"); 
+    		
+		$.ajax({
+			type : "DELETE",
+			url :"http://localhost:8080/api/categories/delete/" + cccID,
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
+			dataType : 'json',
+			success : function() {
+				window.location.replace("category.html");
+			},
+			error : function(e) {
+				window.location.replace("category.html");
+				console.log("ERROR: ", e);
+			}
+		});
+        
+		event.preventDefault();
+		return false;
+    });
 
     //logout
     $(document).on("click", "#logoutButton", function () {
