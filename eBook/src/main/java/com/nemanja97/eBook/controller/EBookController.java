@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nemanja97.eBook.dto.EBookDTO;
 import com.nemanja97.eBook.entity.EBook;
+import com.nemanja97.eBook.lucene.IndexUnit;
+import com.nemanja97.eBook.lucene.Indexer;
+import com.nemanja97.eBook.service.CategoryServiceInterface;
 import com.nemanja97.eBook.service.EBookServiceInterface;
+import com.nemanja97.eBook.service.LanguageServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/ebooks")
@@ -27,6 +31,10 @@ public class EBookController {
 
     @Autowired
     EBookServiceInterface ebookServiceInterface;
+    @Autowired
+    CategoryServiceInterface categoryService;
+    @Autowired
+    LanguageServiceInterface languageService;
 
     @GetMapping
     public ResponseEntity<List<EBookDTO>> getEBooks() {
@@ -58,16 +66,25 @@ public class EBookController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<EBookDTO> createEBook(@RequestBody EBookDTO eBookDTO) {
+    public ResponseEntity<EBookDTO> createEBook(@RequestBody IndexUnit indexUnit) {
         EBook b = new EBook();
-        b.setTitle(eBookDTO.getTitle());
-        b.setAuthor(eBookDTO.getAuthor());
-        b.setKeywords(eBookDTO.getKeywords());
-        b.setPublication_year(eBookDTO.getPublicationYear());
-        b.setFilename(eBookDTO.getFilename());
-        b.setMime(eBookDTO.getMime());
-
+        b.setTitle(indexUnit.getTitle());
+        b.setAuthor(indexUnit.getAuthor());
+        String keyString="";
+        for (String keyword : indexUnit.getKeywords()) {
+			keyString+=keyword+" ";
+		}
+        b.setKeywords(keyString);
+        b.setPublication_year(Integer.parseInt(indexUnit.getFiledate()));
+        b.setFilename(indexUnit.getFilename());
+        b.setMime("application/pdf");
+        
+        b.setCategory(categoryService.findByName(indexUnit.getCategoryDTO()));
+        b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
+        
         b = ebookServiceInterface.save(b);
+        Indexer.getInstance().add(indexUnit.getLuceneDocument());
+        
         return new ResponseEntity<EBookDTO>(new EBookDTO(b), HttpStatus.CREATED);
     }
 

@@ -34,4 +34,11 @@ public class CategoryService implements CategoryServiceInterface {
         categoryRepository.delete(id);
     }
 
+	@Override
+	public Category findByName(String name) {
+		return categoryRepository.findByName(name);
+	}
+    
+    
+
 }

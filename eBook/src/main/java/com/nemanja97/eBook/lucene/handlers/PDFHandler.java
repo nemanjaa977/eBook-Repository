@@ -13,6 +13,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.text.PDFTextStripper;
 
+import com.nemanja97.eBook.dto.LanguageDTO;
 import com.nemanja97.eBook.lucene.IndexUnit;
 
 
@@ -38,10 +39,26 @@ public class PDFHandler extends DocumentHandler {
             String keywords = "" + info.getKeywords();
             if (keywords != null) {
                 String[] splittedKeywords = keywords.split(" ");
-                retVal.setKeywords(new ArrayList<String>(Arrays.asList(splittedKeywords)));
+                if(splittedKeywords.length>=1)
+                	retVal.setKeywords(new ArrayList<String>(Arrays.asList(splittedKeywords)));
+                else
+                	retVal.setKeywords(new ArrayList<String>());
             }
 
             retVal.setFilename(file.getCanonicalPath());
+            
+            String author="";
+            if(info.getAuthor() != null) {
+            	author=info.getAuthor();
+            }
+            retVal.setAuthor(author);
+            
+            String langDto = "";
+            retVal.setLanguageDTO(langDto);
+            
+            String cateString = "";
+            retVal.setCategoryDTO(cateString);
+            
 
             String modificationDate = DateTools.dateToString(new Date(file.lastModified()), DateTools.Resolution.DAY);
             retVal.setFiledate(modificationDate);

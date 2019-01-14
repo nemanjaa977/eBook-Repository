@@ -24,6 +24,7 @@ import com.nemanja97.eBook.entity.Authority;
 import com.nemanja97.eBook.entity.User;
 import com.nemanja97.eBook.repository.AuthorityRepository;
 import com.nemanja97.eBook.service.AuthorityServiceInterface;
+import com.nemanja97.eBook.service.CategoryServiceInterface;
 import com.nemanja97.eBook.service.UserServiceInterface;
 
 @RestController
@@ -37,6 +38,8 @@ public class UserController {
     AuthorityServiceInterface authorityServiceInterface;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    CategoryServiceInterface categoryService;
 
     @GetMapping(value = "/whoami")
     public UserDTO user(Principal user) {
@@ -80,6 +83,7 @@ public class UserController {
         u.setUsername(userDTO.getUsername());
         u.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         u.setType("User");
+        u.setCategory(categoryService.findOne(userDTO.getCategory_id()));
         Authority authority = authorityServiceInterface.findByName("ROLE_USER");
         u.getUser_authorities().add(authority);
         u = userServiceInterface.save(u);

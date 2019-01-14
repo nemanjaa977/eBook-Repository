@@ -8,6 +8,7 @@ import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nemanja97.eBook.dto.CategoryDTO;
 import com.nemanja97.eBook.dto.LanguageDTO;
 
@@ -19,8 +20,8 @@ public class IndexUnit {
     private String filename;
     private String filedate;
     private String author;
-    private LanguageDTO languageDTO;
-    private CategoryDTO categoryDTO;
+    private String languageDTO;
+    private String categoryDTO;
 
     public String getAuthor() {
         return author;
@@ -30,19 +31,19 @@ public class IndexUnit {
         this.author = author;
     }
 
-    public LanguageDTO getLanguageDTO() {
+    public String getLanguageDTO() {
         return languageDTO;
     }
 
-    public void setLanguageDTO(LanguageDTO languageDTO) {
+    public void setLanguageDTO(String languageDTO) {
         this.languageDTO = languageDTO;
     }
 
-    public CategoryDTO getCategoryDTO() {
+    public String getCategoryDTO() {
         return categoryDTO;
     }
 
-    public void setCategoryDTO(CategoryDTO categoryDTO) {
+    public void setCategoryDTO(String categoryDTO) {
         this.categoryDTO = categoryDTO;
     }
 
@@ -86,6 +87,7 @@ public class IndexUnit {
         this.filedate = filedate;
     }
 
+    @JsonIgnore
     public Document getLuceneDocument() {
         Document retVal = new Document();
         retVal.add(new TextField("text", text, Store.NO));
@@ -96,8 +98,8 @@ public class IndexUnit {
         retVal.add(new StringField("filename", filename, Store.YES));
         retVal.add(new TextField("filedate", filedate, Store.YES));
         retVal.add(new StringField("author", author, Store.YES));
-        retVal.add(new StringField("language", languageDTO.getName(), Store.YES));
-        retVal.add(new StringField("category", categoryDTO.getName(), Store.YES));
+        retVal.add(new StringField("language", languageDTO, Store.YES));
+        retVal.add(new StringField("category", categoryDTO, Store.YES));
         return retVal;
     }
 

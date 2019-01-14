@@ -30,52 +30,51 @@ public class Category {
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "category")
     private Set<EBook> ebooks = new HashSet<EBook>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = true)
-    private User user;
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "category")
+    private Set<User> users = new HashSet<User>();
 
     public Category() {
 
     }
 
-    public Category(Integer id, String name, Set<EBook> ebooks, User user) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.ebooks = ebooks;
-        this.user = user;
-    }
+	public Category(Integer id, String name, Set<EBook> ebooks, Set<User> users) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.ebooks = ebooks;
+		this.users = users;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Set<EBook> getEbooks() {
-        return ebooks;
-    }
+	public Set<EBook> getEbooks() {
+		return ebooks;
+	}
 
-    public void setEbooks(Set<EBook> ebooks) {
-        this.ebooks = ebooks;
-    }
+	public void setEbooks(Set<EBook> ebooks) {
+		this.ebooks = ebooks;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public Set<User> getUsers() {
+		return users;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 }

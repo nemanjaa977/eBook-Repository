@@ -67,3 +67,21 @@ html body {
 #addBoook {
     display: none;
 }
+
+#titleUpload {
+	color: white;
+	margin: 15px;
+	text-align: center;
+}
+
+#uploadd {
+	margin-top: 15px;
+	font-size: 18px;
+	color: white;
+	cursor: pointer;
+	background: #333;
+}
+
+#btnSubmit {
+	margin-top: 15px;
+}

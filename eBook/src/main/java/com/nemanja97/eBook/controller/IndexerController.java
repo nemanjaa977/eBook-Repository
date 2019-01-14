@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nemanja97.eBook.dto.EBookDTO;
+import com.nemanja97.eBook.entity.EBook;
 import com.nemanja97.eBook.lucene.IndexUnit;
 import com.nemanja97.eBook.lucene.Indexer;
 import com.nemanja97.eBook.lucene.UploadModel;
@@ -27,6 +32,7 @@ import com.nemanja97.eBook.lucene.UploadModel;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "api/lucene")
 @CrossOrigin("*")
 public class IndexerController {
 	
@@ -58,53 +64,39 @@ public class IndexerController {
 	    }   
 	    return file;
 	}
-	
-
 
     @PostMapping("/index/add")
-    public ResponseEntity<String> multiUploadFileModel(@ModelAttribute UploadModel model) {
-
-
+    public ResponseEntity<IndexUnit> multiUploadFileModel(@RequestParam("file") MultipartFile file) {
         try {
 
-        	indexUploadedFile(model);
+        	IndexUnit unit=indexUploadedFile(file);
+        	return new ResponseEntity<IndexUnit>(unit, HttpStatus.OK);
 
         } catch (IOException e) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<IndexUnit>(HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<String>("Successfully uploaded!", HttpStatus.OK);
-
     }
-	    
 	    
     //save file
     private String saveUploadedFile(MultipartFile file) throws IOException {
     	String retVal = null;
         if (! file.isEmpty()) {
+        	System.out.println(DATA_DIR_PATH);
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(getResourceFilePath(DATA_DIR_PATH).getAbsolutePath() + File.separator + file.getOriginalFilename());
+            Path path = Paths.get(DATA_DIR_PATH + File.separator + file.getOriginalFilename());
             Files.write(path, bytes);
             retVal = path.toString();
         }
         return retVal;
     }
     
-    private void indexUploadedFile(UploadModel model) throws IOException{
-    	
-    	for (MultipartFile file : model.getFiles()) {
-
-            if (file.isEmpty()) {
-                continue; //next please
-            }
-            String fileName = saveUploadedFile(file);
+    private IndexUnit indexUploadedFile(MultipartFile files) throws IOException{		
+            String fileName = saveUploadedFile(files);
             if(fileName != null){
             	IndexUnit indexUnit = Indexer.getInstance().getHandler().getIndexUnit(new File(fileName));
-            	indexUnit.setTitle(model.getTitle());
-            	indexUnit.setKeywords(new ArrayList<String>(Arrays.asList(model.getKeywords().split(" "))));
-            	Indexer.getInstance().add(indexUnit.getLuceneDocument());
+            	return indexUnit;
             }
-    	}
+            return null;	
     }
 	
 }

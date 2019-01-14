@@ -34,4 +34,11 @@ public class LanguageService implements LanguageServiceInterface {
         languageRepository.delete(id);
     }
 
+	@Override
+	public Language findByName(String name) {
+		return languageRepository.findByName(name);
+	}
+    
+    
+
 }

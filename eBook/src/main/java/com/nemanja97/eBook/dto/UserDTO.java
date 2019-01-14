@@ -12,23 +12,27 @@ public class UserDTO implements Serializable {
     private String username;
     private String password;
     private String type;
+    private int category_id;
 
     public UserDTO() {
         super();
     }
 
-    public UserDTO(int id, String firstName, String lastName, String username, String password, String type) {
-        super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.type = type;
-    }
+    public UserDTO(int id, String firstName, String lastName, String username, String password, String type,
+			int category_id) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.type = type;
+		this.category_id = category_id;
+	}
 
-    public UserDTO(User user) {
-        this(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getType());
+	public UserDTO(User user) {
+        this(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getType(),
+        		user.getCategory().getId());
     }
 
     public int getId() {
@@ -78,5 +82,13 @@ public class UserDTO implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+	public int getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
 
 }

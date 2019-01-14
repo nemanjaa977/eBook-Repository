@@ -13,5 +13,7 @@ public interface LanguageServiceInterface {
     Language save(Language language);
 
     void remove(int id);
+    
+    Language findByName(String name);
 
 }

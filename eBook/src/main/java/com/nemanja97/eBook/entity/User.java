@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
@@ -46,9 +47,10 @@ public class User implements UserDetails {
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<EBook> ebooks = new HashSet<EBook>();
-
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Category> categories = new HashSet<Category>();
+    
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = true)
+    private Category category;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
@@ -59,19 +61,20 @@ public class User implements UserDetails {
     }
 
     public User(Integer id, String firstName, String lastName, String username, String password, String type,
-                Set<EBook> ebooks, Set<Category> categories) {
-        super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.type = type;
-        this.ebooks = ebooks;
-        this.categories = categories;
-    }
+			Set<EBook> ebooks, Category category, Set<Authority> user_authorities) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.type = type;
+		this.ebooks = ebooks;
+		this.category = category;
+		this.user_authorities = user_authorities;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -127,16 +130,15 @@ public class User implements UserDetails {
         this.ebooks = ebooks;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
-    }
+    public Category getCategory() {
+		return category;
+	}
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
-
-    public Set<Authority> getUser_authorities() {
+	public Set<Authority> getUser_authorities() {
         return user_authorities;
     }
 
