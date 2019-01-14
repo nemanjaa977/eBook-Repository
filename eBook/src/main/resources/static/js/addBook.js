@@ -81,7 +81,7 @@ $(document).ready(function () {
 			headers: { "Authorization": "Bearer " + token},
 			contentType : "application/json",
 	        success: function (data) {
-	            console.log("SUCCESS : ", data);
+	            window.location.replace("books.html");
 
 	        },
 	        error: function (e) {
