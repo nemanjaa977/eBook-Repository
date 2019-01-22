@@ -89,3 +89,17 @@ html body {
 #titlee {
 	margin-top: 20px;
 }
+
+#labelLanguage {
+	padding-top: 10px;
+	color: white;
+}
+
+#labelCategory {
+	padding-top: 10px;
+	color: white;
+}
+
+#author {
+	margin-top: 15px;
+}

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	
+	var indexUnit=null;
 
     var bookID = window.location.search.slice(1).split('&')[0].split('=')[1];
 
@@ -36,6 +38,27 @@ $(document).ready(function () {
    
     // upload file and put
     $(document).on('change','#uploadd', function(event){
+    	
+    	$.get('http://localhost:8080/api/categories', {}, function(data){
+    		for(i in data){
+    			$('#categoryID').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+    		}
+    	});
+
+       	$.ajax({
+ 	        type: "GET",
+ 	        url: "http://localhost:8080/api/languages",
+ 			headers: { "Authorization": "Bearer " + token},
+ 			contentType : "application/json",
+ 	        success: function (data) {
+ 	        	console.log(data);
+ 	    		for(i in data){
+ 	    			$('#languageID').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+ 	    		}
+ 
+ 	        }
+       	});
+    	
     	var file=$(this)[0].files[0];
     	console.log(file.type);
     	var data=new FormData();
@@ -54,11 +77,25 @@ $(document).ready(function () {
  	        contentType: false,
  	        cache: false,
  	        success: function (data) {
- 	        	console.log(data);
+ 	        	var keywordString="";
+ 	        	for( var item of data.keywords){
+ 	        		keywordString+=item+' ';
+ 	        	}
  	        	title.fadeIn();
  	        	keyword.fadeIn();
  	        	title.val(data.title);
- 	        	keyword.val(data.keywords);
+ 	        	keyword.val(keywordString);
+ 	        	
+ 	        	$('#author').val(data.author);
+ 	    	    $('#categoryID').val(data.categoryDTO);
+ 	    	    $('#languageID').val(data.languageDTO);
+ 	        	$('#author').fadeIn();
+ 	    	    $('#categoryID').fadeIn();
+ 	    	    $('#languageID').fadeIn();
+ 	    	    $('#labelCategory').fadeIn();
+ 	    	    $('#labelLanguage').fadeIn();
+ 	        	
+ 	        	indexUnit=data;
  
  	        },
  	        error: function (e) {
@@ -74,12 +111,21 @@ $(document).ready(function () {
     
     // click add ebook
     $("#btnSubmit").click(function (event) {
- 
+    	
+    	indexUnit.title = $('#titlee').val();
+    //	indexUnit.keywords = $('#keywordd').val();
+    	var keywordsList=$('#keywordd').val().trim().split(" ");
+    	indexUnit.keywords = keywordsList;
+    	indexUnit.author = $('#author').val();
+    	indexUnit.categoryDTO = $('#categoryID').val();
+    	indexUnit.languageDTO = $('#languageID').val();
+    	console.log(indexUnit);
 	    $.ajax({
 	        type: "POST",
 	        url: "http://localhost:8080/api/ebooks",
 			headers: { "Authorization": "Bearer " + token},
 			contentType : "application/json",
+			data: JSON.stringify(indexUnit),
 	        success: function (data) {
 	            window.location.replace("books.html");
 

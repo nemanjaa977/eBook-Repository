@@ -1,5 +1,6 @@
 package com.nemanja97.eBook.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nemanja97.eBook.dto.EBookDTO;
 import com.nemanja97.eBook.entity.EBook;
+import com.nemanja97.eBook.entity.User;
 import com.nemanja97.eBook.lucene.IndexUnit;
 import com.nemanja97.eBook.lucene.Indexer;
 import com.nemanja97.eBook.service.CategoryServiceInterface;
 import com.nemanja97.eBook.service.EBookServiceInterface;
 import com.nemanja97.eBook.service.LanguageServiceInterface;
+import com.nemanja97.eBook.service.UserServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/ebooks")
@@ -35,6 +38,8 @@ public class EBookController {
     CategoryServiceInterface categoryService;
     @Autowired
     LanguageServiceInterface languageService;
+    @Autowired
+    UserServiceInterface userService;
 
     @GetMapping
     public ResponseEntity<List<EBookDTO>> getEBooks() {
@@ -66,7 +71,7 @@ public class EBookController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<EBookDTO> createEBook(@RequestBody IndexUnit indexUnit) {
+    public ResponseEntity<EBookDTO> createEBook(@RequestBody IndexUnit indexUnit, Principal logged) {
         EBook b = new EBook();
         b.setTitle(indexUnit.getTitle());
         b.setAuthor(indexUnit.getAuthor());
@@ -79,11 +84,12 @@ public class EBookController {
         b.setFilename(indexUnit.getFilename());
         b.setMime("application/pdf");
         
-        b.setCategory(categoryService.findByName(indexUnit.getCategoryDTO()));
-        b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
+        b.setCategory(categoryService.findOne(Integer.parseInt(indexUnit.getCategoryDTO())));
+        b.setLanguage(languageService.findOne(Integer.parseInt(indexUnit.getLanguageDTO())));
+        b.setUser(userService.findByUsername(logged.getName()));;
         
-        b = ebookServiceInterface.save(b);
         Indexer.getInstance().add(indexUnit.getLuceneDocument());
+        b = ebookServiceInterface.save(b);
         
         return new ResponseEntity<EBookDTO>(new EBookDTO(b), HttpStatus.CREATED);
     }

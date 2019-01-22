@@ -2,6 +2,7 @@ INSERT INTO authority (name) VALUES ('ROLE_ADMIN');
 INSERT INTO authority (name) VALUES ('ROLE_USER');
 
 INSERT INTO language(name) VALUES ('Serbian');
+INSERT INTO language(name) VALUES ('English');
 
 INSERT INTO category(name) VALUES ('Fantasy');
 INSERT INTO category(name) VALUES ('Action');

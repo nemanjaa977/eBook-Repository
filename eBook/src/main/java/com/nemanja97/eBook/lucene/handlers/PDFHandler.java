@@ -40,7 +40,15 @@ public class PDFHandler extends DocumentHandler {
             if (keywords != null) {
                 String[] splittedKeywords = keywords.split(" ");
                 if(splittedKeywords.length>=1)
-                	retVal.setKeywords(new ArrayList<String>(Arrays.asList(splittedKeywords)));
+                	//retVal.setKeywords(new ArrayList<String>(Arrays.asList(splittedKeywords)));
+                {
+                	ArrayList<String> keywordsList=new ArrayList<String>();
+                	for (String item : splittedKeywords) {
+                		System.out.println(item);
+						keywordsList.add(item);
+					}
+                	retVal.setKeywords(keywordsList);
+                }
                 else
                 	retVal.setKeywords(new ArrayList<String>());
             }

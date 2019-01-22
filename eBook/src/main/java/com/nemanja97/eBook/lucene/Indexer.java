@@ -3,6 +3,7 @@ package com.nemanja97.eBook.lucene;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -79,7 +80,7 @@ public class Indexer {
     public File getIndexDirPath() {
         return indexDirPath;
     }
-
+    
     /**
      * Od dobijenih vrednosti se konstruise Term po kojem se vrsi pretraga dokumenata
      * Dokumenti koji zadovoljavaju uslove pretrage ce biti obrisani
@@ -182,9 +183,7 @@ public class Indexer {
     }
     
     public DocumentHandler getHandler(){
-	
-			return new PDFHandler();
+    	return new PDFHandler();
 	}
-
-
+    
 }
