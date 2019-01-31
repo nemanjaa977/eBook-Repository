@@ -47,7 +47,7 @@ $(document).ready(function () {
 	            "<p id='lastName'>Last name: " + user.lastName + "</p>" +
 	            "<p id='roleUser'>Role: " + user.type + "</p>" +
 	            "<div id='editDataButton'>" +
-	            "<button type='button' class='btn btn-primary editButtonP' id='" + user.id + "'>Edit Profile</button>" +
+	            "<button type='button' class='btn btn-success editButtonP' id='" + user.id + "'>Edit Profile</button>" +
 	            "</div>" +
 	            "</div>");	
 		},

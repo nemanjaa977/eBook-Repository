@@ -6,7 +6,10 @@
 }
 
 html body {
-    background-color: #424242;
+     background-image: url('../photo/photo58.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .nav-item {
@@ -87,8 +90,19 @@ html body {
 }
 
 #imageBook {
-    width: 150px;
-    height: 150px;;
+    width: 170px;
+    height: 190px;
+}
+
+#imageDD {
+	display: inline-block;
+	padding: 5px;
+	margin: 10px;
+}
+
+#boook {
+	display: inline-block;
+	padding: 10px;
 }
 
 #bookTitle {
@@ -107,57 +121,19 @@ html body {
     font-size: 18px;
 }
 
-#divB {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    padding: 40px 4px;
-    text-align: center;
-    height: 100%;
+#oneBook {
+	display: block;
+	border: 1px solid white;
+	border-radius: 5px;
+	margin: 10px;
 }
 
-#oneBook {
-    -ms-flex: 20%;
-    flex: 20%;
-    max-width: 20%;
-    padding: 0 4px;
-    margin-top: 7px;
+#divB {
+	padding-top: 45px;
 }
 
 #addBoook {
     display: none;
-}
-
-
-@media (max-width: 1280px) {
-    #oneBook {
-        -ms-flex: 30%;
-        flex: 30%;
-        max-width: 30%;
-    }
-}
-
-@media (max-width: 1020px) {
-    #oneBook {
-        -ms-flex: 40%;
-        flex: 40%;
-        max-width: 40%;
-    }
-}
-
-@media (max-width: 680px) {
-    #oneBook {
-        -ms-flex: 60%;
-        flex: 60%;
-        max-width: 60%;
-    }
-}
-
-@media (max-width: 1176px) {
-    #navCategory {
-        display: none;
-    }
 }
 
 

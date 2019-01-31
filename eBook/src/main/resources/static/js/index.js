@@ -40,5 +40,17 @@ $(document).ready(function () {
         localStorage.clear();
         window.location.replace('../html/login.html');
     });
+    
+    //click search 
+    $(document).on("click", "#searchButtonOk", function () {
+    	var text = $('#inputSearchText').val();
+    	var selectedSearchBy = $('#searchByy').val();
+    	var selectedSearchUse = $('#SearchUsee').val();
+    	
+    	if (text == ""){
+    		alert("You must enter a text");
+    	}
+    });
+
 
 });

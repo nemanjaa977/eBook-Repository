@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         if (logged.type == "Admin") {
             nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../html/users.html'>Users</a>");
-            $('#buttonCADD').append("<button type='button' class='btn btn-primary' id='buttonAddCategory'><i class='fa fa-plus' aria-hidden='true'></i> New Category</button>");
+            $('#buttonCADD').append("<button type='button' class='btn btn-success' id='buttonAddCategory'><i class='fa fa-plus' aria-hidden='true'></i> New Category</button>");
             document.getElementById('addBoook').style.display = 'block';
 
             // click edit button for category open

@@ -1,5 +1,8 @@
 html body {
-    background-color: #424242;
+    background-image: url('../photo/photo58.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 
@@ -67,4 +70,17 @@ html body {
 
 #addBoook {
     display: none;
+}
+
+#searchDIV {
+	margin-top: 100px;
+}
+
+#searchBY {
+	padding-top: 20px;
+}
+
+#searchBY > label {
+	color: white;
+	padding-top: 10px;
 }

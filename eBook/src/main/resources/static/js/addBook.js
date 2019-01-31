@@ -94,6 +94,8 @@ $(document).ready(function () {
  	    	    $('#languageID').fadeIn();
  	    	    $('#labelCategory').fadeIn();
  	    	    $('#labelLanguage').fadeIn();
+ 	    	    
+ 	    	    $('#btnSubmit').fadeIn();
  	        	
  	        	indexUnit=data;
  
