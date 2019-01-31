@@ -53,7 +53,7 @@ $(document).ready(function () {
  	        success: function (data) {
  	        	console.log(data);
  	    		for(i in data){
- 	    			$('#languageID').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+ 	    			$('#languageID').append("<option value='"+data[i].name+"'>"+data[i].name+"</option>");
  	    		}
  
  	        }

@@ -42,14 +42,47 @@ $(document).ready(function () {
     });
     
     //click search 
-    $(document).on("click", "#searchButtonOk", function () {
+    $(document).on("click", "#searchButtonOk", function (event) {
     	var text = $('#inputSearchText').val();
     	var selectedSearchBy = $('#searchByy').val();
     	var selectedSearchUse = $('#SearchUsee').val();
     	
     	if (text == ""){
     		alert("You must enter a text");
+    		return;
     	}
+    	
+    	var query={
+    		'field': selectedSearchBy,
+    		'value': text
+    	};
+    	
+    	var url="http://localhost:8080/api/search/";
+    	if(selectedSearchUse == "byRegularQuery"){
+    		url += "term";
+    	}else if(selectedSearchUse == "byPhrazeQuery"){
+    		url += "phrase";
+    	}else{
+    		url += "fuzzy";
+    	}
+    	
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : url,
+			data :  JSON.stringify(query),
+			dataType : 'json',
+			success : function(result) {
+				console.log(result);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				
+			}
+		});
+		
+        event.preventDefault();
+        return false;
     });
 
 

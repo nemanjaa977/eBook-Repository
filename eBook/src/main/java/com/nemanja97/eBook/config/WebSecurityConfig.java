@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //svim korisnicima dopusti da pristupe putanjama /auth/**
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users", "/api/search/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categories/**", "/api/ebooks/**").permitAll()
                 //svaki zahtev mora biti autorizovan
                 .anyRequest().authenticated().and()
@@ -110,7 +110,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 HttpMethod.POST,
                 "/auth/login",
-                "/api/users"
+                "/api/users",
+                "/api/search/*"
 
         );
         web.ignoring().antMatchers(

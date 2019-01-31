@@ -18,6 +18,3 @@ INSERT INTO users(first_name, last_name, username, password, type, category_id) 
 INSERT INTO user_authority(user_id, authority_id) VALUES (1, 1);
 INSERT INTO user_authority(user_id, authority_id) VALUES (2, 2);
 
-INSERT INTO ebooks(title, author, keywords, publication_year, filename, mime, language_id, category_id, user_id) VALUES ('The Hobbit', 'Dzon Ronald Rejel Tolkin', '', 2012, 'download', '', 1, 1, 1);
-INSERT INTO ebooks(title, author, keywords, publication_year, filename, mime, language_id, category_id, user_id) VALUES ('Harry Potter', 'J. K. Rowling', '', 2007, 'download', '', 1, 1, 2);
-

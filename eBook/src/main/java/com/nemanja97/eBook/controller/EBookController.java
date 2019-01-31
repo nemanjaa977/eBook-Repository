@@ -85,7 +85,7 @@ public class EBookController {
         b.setMime("application/pdf");
         
         b.setCategory(categoryService.findOne(Integer.parseInt(indexUnit.getCategoryDTO())));
-        b.setLanguage(languageService.findOne(Integer.parseInt(indexUnit.getLanguageDTO())));
+        b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
         b.setUser(userService.findByUsername(logged.getName()));;
         
         Indexer.getInstance().add(indexUnit.getLuceneDocument());
