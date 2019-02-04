@@ -29,6 +29,7 @@ import com.nemanja97.eBook.dto.EBookDTO;
 import com.nemanja97.eBook.entity.EBook;
 import com.nemanja97.eBook.lucene.IndexUnit;
 import com.nemanja97.eBook.lucene.Indexer;
+import com.nemanja97.eBook.lucene.handlers.PDFHandler;
 import com.nemanja97.eBook.service.CategoryServiceInterface;
 import com.nemanja97.eBook.service.EBookServiceInterface;
 import com.nemanja97.eBook.service.LanguageServiceInterface;
@@ -94,7 +95,7 @@ public class EBookController {
 		b.setCategory(categoryService.findOne(Integer.parseInt(indexUnit.getCategoryDTO())));
 		b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
 		b.setUser(userService.findByUsername(logged.getName()));
-		;
+		
 
 		Indexer.getInstance().add(indexUnit.getLuceneDocument());
 		b = ebookServiceInterface.save(b);
@@ -117,6 +118,11 @@ public class EBookController {
 		b.setKeywords(keyString);
 		b.setCategory(categoryService.findOne(Integer.parseInt(indexUnit.getCategoryDTO())));
 		b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
+		PDFHandler handler=new PDFHandler();
+		String path="C:\\Users\\nemanja97\\Desktop\\files\\"+b.getFilename();
+		String text=handler.getText(new File(path));
+		indexUnit.setText(text);
+		indexUnit.setFiledate(b.getPublication_year().toString());
 		Indexer.getInstance().delete(b.getFilename());
 		Indexer.getInstance().add(indexUnit.getLuceneDocument());
 		
@@ -142,21 +148,14 @@ public class EBookController {
 	public ResponseEntity<byte []> download(@PathVariable("fileName") String fileName) throws IOException {
 		String path = "C:\\Users\\nemanja97\\Desktop\\files\\";
 		String finalPath=path+fileName+".pdf";
-//		ClassPathResource pdfFile = new ClassPathResource(finalPath);
 		File file=new File(finalPath);		
 		byte[] bFile = readBytesFromFile(file.toString());
-
 	
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.parseMediaType("application/pdf"));
 		headers.add("Access-Control-Allow-Origin", "*");
 		headers.add("Access-Control-Allow-Methods", "GET, POST, PUT");
 		headers.add("Access-Control-Allow-Headers", "Content-Type");
-//		headers.add("Content-Disposition", "filename=" + fileName);
-//		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-//		headers.add("Pragma", "no-cache");
-//		headers.add("Expires", "0");
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("filename",fileName+".pdf");
 

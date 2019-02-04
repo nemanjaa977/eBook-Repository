@@ -64,9 +64,9 @@ $(document).ready(function () {
             $('.editButtonBook').hide();
             $('.deleteButtonBook').hide();
         }
-//        if (logged.category_id ==){
-//        	 $('.download-Book').hide();
-//        }
+        if (logged.category_id != book.categoryId && logged.type !="Admin"){
+        	 $('.download-Book').hide();
+        }
         
         $('#inputTitle').val(book.title);
         $('#inputAuthor').val(book.author);
@@ -75,7 +75,7 @@ $(document).ready(function () {
         // load category and language for edit
       	$.get('http://localhost:8080/api/categories', {}, function(data){
     		for(i in data){
-    			$('#categoryID').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+    			$('#categoryIDD').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
     		}
     	});
 
@@ -86,14 +86,11 @@ $(document).ready(function () {
  			contentType : "application/json",
  	        success: function (data) {
  	    		for(i in data){
- 	    			$('#languageID').append("<option value='"+data[i].name+"'>"+data[i].name+"</option>");
+ 	    			$('#languageIDD').append("<option value='"+data[i].name+"'>"+data[i].name+"</option>");
  	    		}
  
  	        }
        	});
-       	
-//       	$('#categoryID').val('');
-//       	$('#languageID').val('');
         
     });
 
@@ -108,6 +105,9 @@ $(document).ready(function () {
     $(document).on("click", ".editButtonBook", function (event) {
         $('#bookEdit').fadeIn();
         
+       	$('#categoryIDD').val(bookObject.categoryId);
+       	$('#languageIDD').val(bookObject.language);
+        
 		event.preventDefault();
 		return false;
     });
@@ -118,8 +118,8 @@ $(document).ready(function () {
         var bookTitle = $('#inputTitle').val();
         var bookAuthor = $('#inputAuthor').val();
     	var keywordsList=$('#inputKeywords').val().trim().split(" ");
- 	    var newEditCategory = $('#categoryID').val();
- 	    var newEditLanguage = $('#languageID').val();
+ 	    var newEditCategory = $('#categoryIDD').val();
+ 	    var newEditLanguage = $('#languageIDD').val();
  	    
         var indexUnit = {
             'title': bookTitle,
@@ -186,16 +186,6 @@ $(document).ready(function () {
     $(document).on("click", ".download-Book", function (event) {
     	var bookFilename = $(this).attr("name");  
     	console.log(bookFilename);
-//    	$.ajax({
-//			type : "GET",
-//			url :"http://localhost:8080/api/ebooks/download/" + bookFilename,
-//            headers: { "Authorization": "Bearer " + token},
-//			success : function(response) {
-//			},
-//			error : function(e) {
-//				console.log("ERROR: ", e);
-//			}
-//		});
     	
     	var xhr = new XMLHttpRequest();
 		xhr.open('GET', "http://localhost:8080/api/ebooks/download/"+bookFilename, true);

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nemanja97.eBook.dto.CategoryDTO;
+import com.nemanja97.eBook.dto.EBookDTO;
 import com.nemanja97.eBook.entity.Category;
+import com.nemanja97.eBook.entity.EBook;
 import com.nemanja97.eBook.service.CategoryServiceInterface;
 
 @RestController

@@ -85,7 +85,7 @@ $(document).ready(function () {
 			            	"<div id='boook' class='col-8'>" +
 				                "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
 				                "<p id='authorBook'>" + book.author + "</p>" +
-				                "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+				                "<button type='button' class='btn btn-success download-Book' name='"+book.filename+"'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
 				                "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
 				                	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
 				                "</div>"+
@@ -104,6 +104,9 @@ $(document).ready(function () {
 			                $('.editButtonBook').hide();
 			                $('.deleteButtonBook').hide();
 			            }
+			            if (logged.category_id != result[i].categoryId && logged.type !="Admin"){
+			           	 $('.download-Book').hide();
+			           }
 			        }
 			        $('#allBookss').fadeIn();
 				}else{
@@ -117,6 +120,38 @@ $(document).ready(function () {
 			}
 		});
 		
+        event.preventDefault();
+        return false;
+    });
+  
+    //download book
+    $(document).on("click", ".download-Book", function (event) {
+
+    	var bookFilename = $(this).attr("name");  
+    	console.log(bookFilename);
+    	
+    	var xhr = new XMLHttpRequest();
+		xhr.open('GET', "http://localhost:8080/api/ebooks/download/"+bookFilename, true);
+		xhr.responseType = 'blob';
+		xhr.setRequestHeader('Authorization','Bearer ' + token);
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				var blob = this.response;
+				console.log(blob);
+				console.log(xhr.getResponseHeader('filename'));
+				var a = document.createElement('a');
+				var url = window.URL.createObjectURL(blob);
+				a.href = url;
+				a.download = xhr.getResponseHeader('filename');
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a)
+				window.URL.revokeObjectURL(url);
+			}
+		};
+
+		xhr.send();
+    	
         event.preventDefault();
         return false;
     });
