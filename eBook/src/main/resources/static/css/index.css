@@ -84,3 +84,117 @@ html body {
 	color: white;
 	padding-top: 10px;
 }
+
+#imageBook {
+    width: 170px;
+    height: 190px;
+}
+
+#imageDD {
+	display: inline-block;
+	padding: 5px;
+	margin: 10px;
+}
+
+#boook {
+	display: inline-block;
+	padding: 10px;
+}
+
+#bookTitle {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+#bookTitle:hover {
+    color: #d9534f;
+}
+
+#authorBook {
+    color: white;
+    font-size: 18px;
+}
+
+#oneBook {
+	display: block;
+	border: 1px solid white;
+	border-radius: 5px;
+	margin: 10px;
+	background: rgba(245,220,68,0.48) none no-repeat scroll 0 0;
+}
+
+#allBookss {
+	padding-top: 45px;
+	display: none;
+}
+
+#messageBook {
+	font-size: 40px;
+	color: white;
+	text-align: center;
+}
+
+
+
+.popup {
+    margin-top: 15px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    font-size: 20px;
+    background-color: #0080c0;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 7px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -180%;
+    left: 50%;
+    margin-left: -60px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.popuptext:hover {
+    color: #d9534f;
+}
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

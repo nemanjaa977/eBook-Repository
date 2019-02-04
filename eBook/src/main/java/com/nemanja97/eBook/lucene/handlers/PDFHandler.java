@@ -53,7 +53,7 @@ public class PDFHandler extends DocumentHandler {
                 	retVal.setKeywords(new ArrayList<String>());
             }
 
-            retVal.setFilename(file.getCanonicalPath());
+            retVal.setFilename(file.getName());
             
             String author="";
             if(info.getAuthor() != null) {

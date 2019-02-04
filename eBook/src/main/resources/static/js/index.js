@@ -74,6 +74,42 @@ $(document).ready(function () {
 			dataType : 'json',
 			success : function(result) {
 				console.log(result);
+				$('#allBookss').empty();
+				if(result.length > 0){
+			        for (var i = 0; i < result.length; i++) {
+			            book = result[i];
+			            $('#allBookss').append("<div id='oneBook' class='col-12'>" +
+			            	"<div id='imageDD'>" +
+			            		"<img src='../photo/photo67.jpeg' alt='Book image' id='imageBook'>" +
+			            	"</div>" +
+			            	"<div id='boook' class='col-8'>" +
+				                "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
+				                "<p id='authorBook'>" + book.author + "</p>" +
+				                "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+				                "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+				                	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+				                "</div>"+
+			                "</div>"+
+			                "</div>");
+			            if(logged == null) {
+			                $('.download-Book').hide();
+			            }else{
+			            	$('.popup').hide();
+			            }
+			            if (logged == null) {
+			                $('#bookDiv').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+			                    "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+			                    "</div>");
+			                $('.download-Book').hide();
+			                $('.editButtonBook').hide();
+			                $('.deleteButtonBook').hide();
+			            }
+			        }
+			        $('#allBookss').fadeIn();
+				}else{
+					$('#allBookss').append("<p id='messageBook'>There are no books for this query!</p>");
+					$('#allBookss').fadeIn();
+				}
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
@@ -87,3 +123,8 @@ $(document).ready(function () {
 
 
 });
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}

@@ -46,7 +46,10 @@ $(document).ready(function () {
 	                "<a class='btn btn-danger deleteUserr' id='"+user.id+"' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
 	                "</div>" +
 	                "</div>");
-	        }		
+	            if(logged.id == user.id){
+	            	$('.deleteUserr').hide();
+	            }
+	        }
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);

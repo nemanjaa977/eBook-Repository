@@ -5,13 +5,11 @@ $(document).ready(function () {
     var logged = JSON.parse(localStorage.getItem("loggedUser"));
     console.log(logged);
     var token = localStorage.getItem("token");
-
+    var bookObject=null;
     var navbar = $('#navbar');
     var dropDown = $('#dropp');
     var nav = $('#navv');
     
-    var filenameForEdit = null;
-    var mimeForEdit = null;
 
     nav.append("<a class='flex-sm-fill text-sm-center nav-link' href='../index.html'>Home</a>" +
         "<a class='flex-sm-fill text-sm-center nav-link' href='../html/category.html'>Category</a>" +
@@ -42,11 +40,13 @@ $(document).ready(function () {
     var bookInformation = $('#bookInformation');
     $.get("http://localhost:8080/api/ebooks/" + bookID, {}, function (data) {
         book = data;
+        bookObject=data;
+        console.log(book);
         bookInformation.append("<div id='bookDiv'>" +
             "<a href='../html/book.html?id=" + book.id + "' id='titleBook'>" + book.title + "</a>" +
             "<p id='authorBook'>Author: " + book.author + "</p>" +
             "<p id='yearBook'>Year: " + book.publicationYear + "</p>" +
-            "<button type='button' class='btn btn-success download-Book'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+            "<button type='button' class='btn btn-success download-Book' name='"+book.filename+"'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
             "<div id='bookDataButton'>" +
 	            "<button type='button' class='btn btn-primary editButtonBook' id='" + book.id + "'>Edit Book</button>" +
 	            "<button type='button' class='btn btn-danger deleteButtonBook' id='" + book.id + "'>Delete Book</button>" +
@@ -60,14 +60,41 @@ $(document).ready(function () {
             $('.editButtonBook').hide();
             $('.deleteButtonBook').hide();
         }
+        if (logged.type != "Admin"){
+            $('.editButtonBook').hide();
+            $('.deleteButtonBook').hide();
+        }
+//        if (logged.category_id ==){
+//        	 $('.download-Book').hide();
+//        }
         
         $('#inputTitle').val(book.title);
         $('#inputAuthor').val(book.author);
         $('#inputKeywords').val(book.keywords);
-        $('#inputYear').val(book.publicationYear);
         
-        filenameForEdit = book.filename;
-        mimeForEdit = book.mime;
+        // load category and language for edit
+      	$.get('http://localhost:8080/api/categories', {}, function(data){
+    		for(i in data){
+    			$('#categoryID').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+    		}
+    	});
+
+       	$.ajax({
+ 	        type: "GET",
+ 	        url: "http://localhost:8080/api/languages",
+ 			headers: { "Authorization": "Bearer " + token},
+ 			contentType : "application/json",
+ 	        success: function (data) {
+ 	    		for(i in data){
+ 	    			$('#languageID').append("<option value='"+data[i].name+"'>"+data[i].name+"</option>");
+ 	    		}
+ 
+ 	        }
+       	});
+       	
+//       	$('#categoryID').val('');
+//       	$('#languageID').val('');
+        
     });
 
 
@@ -90,23 +117,24 @@ $(document).ready(function () {
 
         var bookTitle = $('#inputTitle').val();
         var bookAuthor = $('#inputAuthor').val();
-        var bookKeywords = $('#inputKeywords').val();
-        var bookYear = $('#inputYear').val();
-
-        var param = {
+    	var keywordsList=$('#inputKeywords').val().trim().split(" ");
+ 	    var newEditCategory = $('#categoryID').val();
+ 	    var newEditLanguage = $('#languageID').val();
+ 	    
+        var indexUnit = {
             'title': bookTitle,
             'author': bookAuthor,
-            'keywords': bookKeywords,
-            'publicationYear': bookYear,
-            'filename': filenameForEdit,
-            'mime': mimeForEdit
+            'keywords': keywordsList,
+            'filename': bookObject.filename,
+            'categoryDTO': newEditCategory,
+            'languageDTO': newEditLanguage
         }
 
         $.ajax({
             type: "PUT",
             contentType: "application/json",
             url: "http://localhost:8080/api/ebooks/update/" + bookID,
-            data: JSON.stringify(param),
+            data: JSON.stringify(indexUnit),
             headers: { "Authorization": "Bearer " + token},
 			contentType : "application/json",
             dataType: 'json',
@@ -149,6 +177,47 @@ $(document).ready(function () {
 				console.log("ERROR: ", e);
 			}
 		});
+        
+		event.preventDefault();
+		return false;
+    });
+    
+    //download
+    $(document).on("click", ".download-Book", function (event) {
+    	var bookFilename = $(this).attr("name");  
+    	console.log(bookFilename);
+//    	$.ajax({
+//			type : "GET",
+//			url :"http://localhost:8080/api/ebooks/download/" + bookFilename,
+//            headers: { "Authorization": "Bearer " + token},
+//			success : function(response) {
+//			},
+//			error : function(e) {
+//				console.log("ERROR: ", e);
+//			}
+//		});
+    	
+    	var xhr = new XMLHttpRequest();
+		xhr.open('GET', "http://localhost:8080/api/ebooks/download/"+bookFilename, true);
+		xhr.responseType = 'blob';
+		xhr.setRequestHeader('Authorization','Bearer ' + token);
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				var blob = this.response;
+				console.log(blob);
+				console.log(xhr.getResponseHeader('filename'));
+				var a = document.createElement('a');
+				var url = window.URL.createObjectURL(blob);
+				a.href = url;
+				a.download = xhr.getResponseHeader('filename');
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a)
+				window.URL.revokeObjectURL(url);
+			}
+		};
+
+		xhr.send();
         
 		event.preventDefault();
 		return false;
