@@ -49,7 +49,7 @@ public class ResultRetriever {
 			Directory indexDir = new SimpleFSDirectory(FileSystems.getDefault().getPath(ResourceBundle
 					.getBundle("application").getString("index")));
 			DirectoryReader reader = DirectoryReader.open(indexDir);
-			IndexSearcher is = new IndexSearcher(reader);
+			IndexSearcher is = new IndexSearcher(reader); //pretraga dokumenta
 			TopScoreDocCollector collector = TopScoreDocCollector.create(
 					maxHits);
 

@@ -118,11 +118,13 @@ public class EBookController {
 		b.setKeywords(keyString);
 		b.setCategory(categoryService.findOne(Integer.parseInt(indexUnit.getCategoryDTO())));
 		b.setLanguage(languageService.findByName(indexUnit.getLanguageDTO()));
+		
 		PDFHandler handler=new PDFHandler();
 		String path="C:\\Users\\nemanja97\\Desktop\\files\\"+b.getFilename();
 		String text=handler.getText(new File(path));
 		indexUnit.setText(text);
 		indexUnit.setFiledate(b.getPublication_year().toString());
+		
 		Indexer.getInstance().delete(b.getFilename());
 		Indexer.getInstance().add(indexUnit.getLuceneDocument());
 		

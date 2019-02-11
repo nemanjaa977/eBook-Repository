@@ -78,7 +78,7 @@ public class IndexerController {
     }
 	    
     //save file
-    private String saveUploadedFile(MultipartFile file) throws IOException {
+    private String saveUploadedFile(MultipartFile file) throws IOException { //sacuva folder files 
     	String retVal = null;
         if (! file.isEmpty()) {
         	System.out.println(DATA_DIR_PATH);

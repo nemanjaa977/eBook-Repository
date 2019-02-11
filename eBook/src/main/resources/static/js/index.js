@@ -83,14 +83,15 @@ $(document).ready(function () {
 			            		"<img src='../photo/photo67.jpeg' alt='Book image' id='imageBook'>" +
 			            	"</div>" +
 			            	"<div id='boook' class='col-8'>" +
-				                "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
+				                "<p id='bookTitle'>" + book.title + "</p>" +
 				                "<p id='authorBook'>" + book.author + "</p>" +
-				                "<button type='button' class='btn btn-success download-Book' name='"+book.filename+"'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+				                "<button type='button' class='btn btn-success download-Book' name='"+book.location+"'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
 				                "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
 				                	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
 				                "</div>"+
 			                "</div>"+
 			                "</div>");
+			            console.log(book.location);
 			            if(logged == null) {
 			                $('.download-Book').hide();
 			            }else{

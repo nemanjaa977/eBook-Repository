@@ -1,5 +1,8 @@
 html body {
-    background-color: #424242;
+    background-image: url('../photo/photo58.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .nav-item {
@@ -66,4 +69,44 @@ html body {
 
 #addBoook {
     display: none;
+}
+
+#titleUpload {
+	color: white;
+	margin: 15px;
+	text-align: center;
+}
+
+#uploadd {
+	margin-top: 15px;
+	font-size: 18px;
+	color: white;
+	cursor: pointer;
+	background: #333;
+}
+
+#btnSubmit {
+	margin-top: 15px;
+}
+
+#titlee {
+	margin-top: 20px;
+}
+
+#labelLanguage {
+	padding-top: 10px;
+	color: white;
+}
+
+#labelCategory {
+	padding-top: 10px;
+	color: white;
+}
+
+#author {
+	margin-top: 15px;
+}
+
+#btnSubmit {
+	display: none;
 }

@@ -84,7 +84,7 @@ public class PDFHandler extends DocumentHandler {
         try {
             PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
             parser.parse();
-            PDFTextStripper textStripper = new PDFTextStripper();
+            PDFTextStripper textStripper = new PDFTextStripper(); //-uzima se tekst iz dokumenta
             String text = textStripper.getText(parser.getPDDocument());
             return text;
         } catch (IOException e) {

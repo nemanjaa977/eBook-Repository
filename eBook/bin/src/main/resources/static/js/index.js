@@ -40,5 +40,126 @@ $(document).ready(function () {
         localStorage.clear();
         window.location.replace('../html/login.html');
     });
+    
+    //click search 
+    $(document).on("click", "#searchButtonOk", function (event) {
+    	var text = $('#inputSearchText').val();
+    	var selectedSearchBy = $('#searchByy').val();
+    	var selectedSearchUse = $('#SearchUsee').val();
+    	
+    	if (text == ""){
+    		alert("You must enter a text");
+    		return;
+    	}
+    	
+    	var query={
+    		'field': selectedSearchBy,
+    		'value': text
+    	};
+    	
+    	var url="http://localhost:8080/api/search/";
+    	if(selectedSearchUse == "byRegularQuery"){
+    		url += "term";
+    	}else if(selectedSearchUse == "byPhrazeQuery"){
+    		url += "phrase";
+    	}else{
+    		url += "fuzzy";
+    	}
+    	
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : url,
+			data :  JSON.stringify(query),
+			dataType : 'json',
+			success : function(result) {
+				console.log(result);
+				$('#allBookss').empty();
+				if(result.length > 0){
+			        for (var i = 0; i < result.length; i++) {
+			            book = result[i];
+			            $('#allBookss').append("<div id='oneBook' class='col-12'>" +
+			            	"<div id='imageDD'>" +
+			            		"<img src='../photo/photo67.jpeg' alt='Book image' id='imageBook'>" +
+			            	"</div>" +
+			            	"<div id='boook' class='col-8'>" +
+				                "<a id='bookTitle' href='../html/book.html?id=" + book.id + "'>" + book.title + "</a>" +
+				                "<p id='authorBook'>" + book.author + "</p>" +
+				                "<button type='button' class='btn btn-success download-Book' name='"+book.filename+"'><i class='fa fa-download' aria-hidden='true'></i> Download</button>" +
+				                "<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+				                	"<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+				                "</div>"+
+			                "</div>"+
+			                "</div>");
+			            if(logged == null) {
+			                $('.download-Book').hide();
+			            }else{
+			            	$('.popup').hide();
+			            }
+			            if (logged == null) {
+			                $('#bookDiv').append("<div class='popup' onclick='myFunction()'><i class='fa fa-download' aria-hidden='true'></i> Download" +
+			                    "<a href='../html/register.html' class='popuptext' id='myPopup'>Register now!</a>" +
+			                    "</div>");
+			                $('.download-Book').hide();
+			                $('.editButtonBook').hide();
+			                $('.deleteButtonBook').hide();
+			            }
+			            if (logged.category_id != result[i].categoryId && logged.type !="Admin"){
+			           	 $('.download-Book').hide();
+			           }
+			        }
+			        $('#allBookss').fadeIn();
+				}else{
+					$('#allBookss').append("<p id='messageBook'>There are no books for this query!</p>");
+					$('#allBookss').fadeIn();
+				}
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				
+			}
+		});
+		
+        event.preventDefault();
+        return false;
+    });
+  
+    //download book
+    $(document).on("click", ".download-Book", function (event) {
+
+    	var bookFilename = $(this).attr("name");  
+    	console.log(bookFilename);
+    	
+    	var xhr = new XMLHttpRequest();
+		xhr.open('GET', "http://localhost:8080/api/ebooks/download/"+bookFilename, true);
+		xhr.responseType = 'blob';
+		xhr.setRequestHeader('Authorization','Bearer ' + token);
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				var blob = this.response;
+				console.log(blob);
+				console.log(xhr.getResponseHeader('filename'));
+				var a = document.createElement('a');
+				var url = window.URL.createObjectURL(blob);
+				a.href = url;
+				a.download = xhr.getResponseHeader('filename');
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a)
+				window.URL.revokeObjectURL(url);
+			}
+		};
+
+		xhr.send();
+    	
+        event.preventDefault();
+        return false;
+    });
+
 
 });
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}

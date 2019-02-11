@@ -59,9 +59,9 @@ $(document).ready(function () {
  	        }
        	});
     	
-    	var file=$(this)[0].files[0];
+    	var file=$(this)[0].files[0]; //prvi selektovani fajl
     	console.log(file.type);
-    	var data=new FormData();
+    	var data=new FormData(); //saljem fajl
     	var title = $('#titlee');
     	var keyword = $('#keywordd');
     	data.append("file",file);
@@ -97,7 +97,7 @@ $(document).ready(function () {
  	    	    
  	    	    $('#btnSubmit').fadeIn();
  	        	
- 	        	indexUnit=data;
+ 	        	indexUnit=data; //u slucaju da nezimenim uzima postojece podatke
  
  	        },
  	        error: function (e) {

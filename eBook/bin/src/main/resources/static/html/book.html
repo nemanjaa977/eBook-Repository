@@ -46,18 +46,40 @@
 	    </div>
 	</div>
 	<!-- load book -->
-	<div class="container-fluid" id="treci">
+	<div class="container-fluid col-md-8" id="treci">
 	    <div class="row">
-	        <div class='col-2'></div>
-	        <div class='row col-8'>
 	            <div class='col-4'>
-	                <img src='../photo/photo2.png' alt='Card image' id='picture'>
+	                <img src='../photo/photo67.jpeg' alt='Card image' id='picture'>
 	            </div>
 	            <div class='col-8' id='bookInformation'>
 	            </div>
-	        </div>
-	        <div class='col-2'></div>
 	    </div>
+	</div>
+	<div class="container-fluid col-md-6" id="editBook">
+		<form id="bookEdit" class='col-12'>
+		    <div class="form-group">
+		    	<label for="inputTitle" id='labela'>Title</label>
+			    <input type="text" class="form-control" id="inputTitle">
+		    </div>
+    		<div class="form-group">
+		    	<label for="inputAuthor" id='labela'>Author</label>
+			    <input type="text" class="form-control" id="inputAuthor">
+		    </div>
+       		<div class="form-group">
+		    	<label for="inputKeywords" id='labela'>Keywords</label>
+			    <input type="text" class="form-control" id="inputKeywords">
+		    </div>
+		    <div class="form-group">
+	     		<label id='labelCategory'>Select new category</label>
+			    <select class="form-control" id="categoryIDD">
+			    </select>
+			    <label id='labelLanguage'>Select new language</label>
+			    <select class="form-control" id="languageIDD" >
+			    </select>
+		    </div>
+		 	<button type="submit" class="btn btn-primary" id="editSubmit">Submit</button>
+		 	<button type="button" class="btn btn-light" id="closeEdit">Close</button>
+		</form>
 	</div>
 </body>
 </html>

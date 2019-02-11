@@ -43,14 +43,40 @@ $(document).ready(function () {
 	                "<p class='card-text'>" + user.firstName + "</p>" +
 	                "<p class='card-text'>" + user.lastName + "</p>" +
 	                "<p class='card-text' id='roleD'>Role: " + user.type + "</p>" +
-	                "<a class='btn btn-danger' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
+	                "<a class='btn btn-danger deleteUserr' id='"+user.id+"' style='color:white;'><i class='fa fa-trash' aria-hidden='true'></i></a>" +
 	                "</div>" +
 	                "</div>");
-	        }		
+	            if(logged.id == user.id){
+	            	$('.deleteUserr').hide();
+	            }
+	        }
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
 		}
+    });
+    
+    //delete user
+    $(document).on("click", ".deleteUserr", function (event) {
+        var uuuID = $(this).attr("id");       
+    		
+		$.ajax({
+			type : "DELETE",
+			url :"http://localhost:8080/api/users/delete/" + uuuID,
+            headers: { "Authorization": "Bearer " + token},
+			contentType : "application/json",
+			dataType : 'json',
+			success : function() {
+				window.location.reload();
+			},
+			error : function(e) {
+				window.location.reload();
+				console.log("ERROR: ", e);
+			}
+		});
+        
+		event.preventDefault();
+		return false;
     });
 
 

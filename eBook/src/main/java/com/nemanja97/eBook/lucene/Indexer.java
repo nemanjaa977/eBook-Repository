@@ -115,43 +115,6 @@ public class Indexer {
 
     }
 
-    public boolean updateDocument(String filename, List<IndexableField> fields) {
-        try {
-            DirectoryReader reader = DirectoryReader.open(this.indexDir);
-            IndexSearcher is = new IndexSearcher(reader);
-            Query query = new TermQuery(new Term("filename", filename));
-            TopScoreDocCollector collector = TopScoreDocCollector.create(10);
-            is.search(query, collector);
-
-            ScoreDoc[] scoreDocs = collector.topDocs().scoreDocs;
-            if (scoreDocs.length > 0) {
-                int docID = scoreDocs[0].doc;
-                Document doc = is.doc(docID);
-                if (doc != null) {
-                    for (IndexableField field : fields) {
-                        doc.removeFields(field.name());
-                    }
-                    for (IndexableField field : fields) {
-                        doc.add(field);
-                    }
-                    try {
-                        synchronized (this) {
-                            this.indexWriter.updateDocument(new Term("filename", filename), doc);
-                            this.indexWriter.commit();
-                            return true;
-                        }
-                    } catch (IOException e) {
-                    }
-                }
-            }
-
-            return false;
-
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Indeksni direktorijum nije u redu");
-        }
-    }
-
     /**
      * @param file Direktorijum u kojem se nalaze dokumenti koje treba indeksirati
      */

@@ -1,5 +1,8 @@
 html body {
-    background-color: #424242;
+    background-image: url('../photo/photo58.jpeg');');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #logoDiv {
@@ -31,4 +34,8 @@ html body {
 #registerSubmit:hover {
     background: white;
     color: #d9534f;
+}
+
+#categoryID {
+	margin-bottom: 10px;
 }
